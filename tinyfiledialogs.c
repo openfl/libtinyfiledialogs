@@ -139,7 +139,7 @@ set this to 1 to tell tinyfiledialogs to assume the existence of a graphic displ
 char tinyfd_response[1024];
 /* if you pass "tinyfd_query" as aTitle,
 the functions will not display the dialogs
-but and return 0 for console mode, 1 for graphic mode.
+but return 0 for console mode, 1 for graphic mode.
 tinyfd_response is then filled with the retain solution.
 possible values for tinyfd_response are (all lowercase)
 for graphic mode:
@@ -604,7 +604,7 @@ wchar_t* tinyfd_mbcsTo16(char const* aMbcsString)
 	lSize = sizeUtf16FromMbcs(aMbcsString);
 	if (lSize)
 	{
-		lMbcsString = (wchar_t*)malloc(lSize * sizeof(wchar_t));
+		lMbcsString = (wchar_t*) malloc(lSize * sizeof(wchar_t));
 		lSize = MultiByteToWideChar(CP_ACP, 0, aMbcsString, -1, lMbcsString, lSize);
 	}
 	else wcscpy(lMbcsString, L"");
@@ -622,7 +622,7 @@ wchar_t * tinyfd_utf8to16(char const * aUtf8string)
 		lSize = sizeUtf16From8(aUtf8string);
 	if (lSize)
 	{
-		lUtf16string = (wchar_t*)malloc(lSize * sizeof(wchar_t));
+		lUtf16string = (wchar_t*) malloc(lSize * sizeof(wchar_t));
 		lSize = MultiByteToWideChar(CP_UTF8, MB_ERR_INVALID_CHARS,
 			aUtf8string, -1, lUtf16string, lSize);
 		return lUtf16string;
@@ -646,7 +646,7 @@ char * tinyfd_utf16toMbcs(wchar_t const * aUtf16string)
 		lSize = sizeMbcs(aUtf16string);
 	if (lSize)
 	{
-		lMbcsString = (char*)malloc(lSize);
+		lMbcsString = (char*) malloc(lSize);
 		lSize = WideCharToMultiByte(CP_ACP, 0, aUtf16string, -1, lMbcsString, lSize, NULL, NULL);
 	}
 	else strcpy(lMbcsString, "");
@@ -672,7 +672,7 @@ char * tinyfd_utf16to8(wchar_t const * aUtf16string)
 		lSize = sizeUtf8(aUtf16string);
 	if (lSize)
 	{
-		lUtf8string = (char*)malloc(lSize);
+		lUtf8string = (char*) malloc(lSize);
 		lSize = WideCharToMultiByte(CP_UTF8, WC_ERR_INVALID_CHARS, aUtf16string, -1, lUtf8string, lSize, NULL, NULL);
 	}
 	else strcpy(lUtf8string, "");
@@ -1179,7 +1179,7 @@ int tinyfd_notifyPopupW(
 		lTitleLen = aTitle ? wcslen(aTitle) : 0;
 		lMessageLen = aMessage ? wcslen(aMessage) : 0;
 		lDialogStringLen = 3 * MAX_PATH_OR_CMD + lTitleLen + lMessageLen;
-		lDialogString = (wchar_t *)malloc(2 * lDialogStringLen);
+		lDialogString = (wchar_t *) malloc(2 * lDialogStringLen);
 		if (!lDialogString) return 0;
 
 		wcscpy(lDialogString, L"powershell.exe -command \"\
@@ -1256,7 +1256,7 @@ wchar_t * tinyfd_inputBoxW(
 		lTitleLen =  aTitle ? wcslen(aTitle) : 0 ;
 		lMessageLen =  aMessage ? wcslen(aMessage) : 0 ;
 		lDialogStringLen = 3 * MAX_PATH_OR_CMD + lTitleLen + lMessageLen;
-		lDialogString = (wchar_t *)malloc(2 * lDialogStringLen);
+		lDialogString = (wchar_t *) malloc(2 * lDialogStringLen);
 
 		if (aDefaultInput)
 		{
@@ -1650,17 +1650,17 @@ wchar_t * tinyfd_openFileDialogW(
 		if (aAllowMultipleSelects)
 		{
 				lFullBuffLen = MAX_MULTIPLE_FILES * MAX_PATH_OR_CMD + 1;
-				lBuff = (wchar_t*)(malloc(lFullBuffLen * sizeof(wchar_t)));
+				lBuff = (wchar_t*) malloc(lFullBuffLen * sizeof(wchar_t));
 				if (!lBuff)
 				{
 						lFullBuffLen = LOW_MULTIPLE_FILES * MAX_PATH_OR_CMD + 1;
-						lBuff = (wchar_t*)( malloc( lFullBuffLen * sizeof(wchar_t)));
+						lBuff = (wchar_t*) malloc( lFullBuffLen * sizeof(wchar_t));
 				}
 		}
 		else
 		{
 				lFullBuffLen = MAX_PATH_OR_CMD + 1;
-				lBuff = (wchar_t*)(malloc(lFullBuffLen * sizeof(wchar_t)));
+				lBuff = (wchar_t*) malloc(lFullBuffLen * sizeof(wchar_t));
 		}
 		if (!lBuff) return NULL;
 
@@ -2074,12 +2074,12 @@ static char * saveFileDialogWinGui(
 		char * lTmpChar;
 		int i;
 
-		lFilterPatterns = (wchar_t **)malloc(aNumOfFilterPatterns*sizeof(wchar_t *));
+		lFilterPatterns = (wchar_t **) malloc(aNumOfFilterPatterns*sizeof(wchar_t *));
 		for (i = 0; i < aNumOfFilterPatterns; i++)
 		{
 				if (tinyfd_winUtf8) lTmpWChar = tinyfd_utf8to16(aFilterPatterns[i]);
 				else lTmpWChar = tinyfd_mbcsTo16(aFilterPatterns[i]);
-				lFilterPatterns[i] = (wchar_t *)malloc((wcslen(lTmpWChar) + 1) * sizeof(wchar_t *));
+				lFilterPatterns[i] = (wchar_t *) malloc((wcslen(lTmpWChar) + 1) * sizeof(wchar_t *));
 				if (lFilterPatterns[i]) wcscpy(lFilterPatterns[i], lTmpWChar);
 		}
 
@@ -2146,12 +2146,12 @@ static char * openFileDialogWinGui(
 		char * lTmpChar;
 		int i;
 
-		lFilterPatterns = (wchar_t * *)malloc(aNumOfFilterPatterns*sizeof(wchar_t *));
+		lFilterPatterns = (wchar_t * *) malloc(aNumOfFilterPatterns*sizeof(wchar_t *));
 		for (i = 0; i < aNumOfFilterPatterns; i++)
 		{
 				if (tinyfd_winUtf8) lTmpWChar = tinyfd_utf8to16(aFilterPatterns[i]);
 				else lTmpWChar = tinyfd_mbcsTo16(aFilterPatterns[i]);
-				lFilterPatterns[i] = (wchar_t *)malloc((wcslen(lTmpWChar) + 1)*sizeof(wchar_t *));
+				lFilterPatterns[i] = (wchar_t *) malloc((wcslen(lTmpWChar) + 1)*sizeof(wchar_t *));
 	  if (lFilterPatterns[i]) wcscpy(lFilterPatterns[i], lTmpWChar);
 		}
 
@@ -3668,7 +3668,7 @@ static int speakertestPresent(void)
 }
 
 
-static int playPresent()
+static int playPresent(void)
 {
    static int lPlayPresent = -1;
    if (lPlayPresent < 0)
@@ -3679,7 +3679,7 @@ static int playPresent()
 }
 
 
-static int beepexePresent()
+static int beepexePresent(void)
 {
    static int lBeepexePresent = -1;
    if (lBeepexePresent < 0)
@@ -4067,25 +4067,12 @@ static int osx9orBetter(void)
 static int python3Present(void)
 {
 		static int lPython3Present = -1 ;
-		int i;
 
 		if ( lPython3Present < 0 )
 		{
 				lPython3Present = 0 ;
 				strcpy(gPython3Name , "python3" ) ;
 				if ( detectPresence(gPython3Name) ) lPython3Present = 1;
-				/*else
-				{
-						for ( i = 9 ; i >= 0 ; i -- )
-						{
-								sprintf( gPython3Name , "python3.%d" , i ) ;
-								if ( detectPresence(gPython3Name) )
-								{
-										lPython3Present = 1;
-										break;
-								}
-						}
-				}*/
 				if (tinyfd_verbose) printf("lPython3Present %d\n", lPython3Present) ;
 				if (tinyfd_verbose) printf("gPython3Name %s\n", gPython3Name) ;
 		}
@@ -4102,18 +4089,6 @@ static int python2Present(void)
 				lPython2Present = 0 ;
 				strcpy(gPython2Name , "python2" ) ;
 				if ( detectPresence(gPython2Name) ) lPython2Present = 1;
-				/*else
-				{
-						for ( i = 9 ; i >= 0 ; i -- )
-						{
-								sprintf( gPython2Name , "python2.%d" , i ) ;
-								if ( detectPresence(gPython2Name) )
-								{
-										lPython2Present = 1;
-										break;
-								}
-						}
-				}*/
 				if (tinyfd_verbose) printf("lPython2Present %d\n", lPython2Present) ;
 				if (tinyfd_verbose) printf("gPython2Name %s\n", gPython2Name) ;
 		}
@@ -6552,17 +6527,17 @@ char * tinyfd_openFileDialog(
 						if (aAllowMultipleSelects)
 						{
 								lFullBuffLen = MAX_MULTIPLE_FILES * MAX_PATH_OR_CMD + 1;
-								lBuff = (char *)(malloc(lFullBuffLen * sizeof(char)));
+								lBuff = (char *) malloc(lFullBuffLen * sizeof(char));
 								if (!lBuff)
 								{
 										lFullBuffLen = LOW_MULTIPLE_FILES * MAX_PATH_OR_CMD + 1;
-										lBuff = (char *)( malloc( lFullBuffLen * sizeof(char)));
+										lBuff = (char *) malloc( lFullBuffLen * sizeof(char));
 								}
 						}
 						else
 						{
 								lFullBuffLen = MAX_PATH_OR_CMD + 1;
-								lBuff = (char *)(malloc(lFullBuffLen * sizeof(char)));
+								lBuff = (char *) malloc(lFullBuffLen * sizeof(char));
 						}
 						if (!lBuff) return NULL;
 						lBuff[0]='\0';

@@ -185,8 +185,10 @@ char const * tinyfd_colorChooser(
 UNIX (including MacOS) :
 $ clang -o hello hello.c tinyfiledialogs.c
 ( or gcc tcc owcc cc CC )
-( usefull warnings: -g3 -Wall -Wextra -Wdouble-promotion -Wconversion -Wno-sign-conversion
--Wno-unused-parameter -Wno-unused-function -fsanitize=undefined -fsanitize=thread )
+( or g++ clang++ )
+( usefull warnings: -ansi -std=c89 -std=c++98 -pedantic -Wstrict-prototypes -g3 -Wall
+-Wextra -Wdouble-promotion -Wconversion -Wno-sign-conversion -Wno-unused-parameter
+-Wno-unused-function -fsanitize=undefined -fsanitize=thread )
 
 Windows :
   MinGW needs gcc >= v4.9 otherwise some headers are incomplete
