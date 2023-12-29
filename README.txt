@@ -189,6 +189,7 @@ $ clang -o hello hello.c tinyfiledialogs.c
 ( usefull warnings: -ansi -std=c89 -std=c++98 -pedantic -Wstrict-prototypes -g3 -Wall
 -Wextra -Wdouble-promotion -Wconversion -Wno-sign-conversion -Wno-unused-parameter
 -Wno-unused-function -fsanitize=undefined -fsanitize=thread )
+( clang -fuse-ld=lld --rtlib=compiler-rt ))
 
 Windows :
   MinGW needs gcc >= v4.9 otherwise some headers are incomplete
