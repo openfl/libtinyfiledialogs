@@ -186,9 +186,7 @@ UNIX (including MacOS) :
 $ clang -o hello hello.c tinyfiledialogs.c
 ( or gcc tcc owcc cc CC )
 ( or g++ clang++ )
-( usefull warnings: -ansi -std=c89 -std=c++98 -pedantic -Wstrict-prototypes -g3 -Wall
--Wextra -Wdouble-promotion -Wconversion -Wno-sign-conversion -Wno-unused-parameter
--Wno-unused-function -fsanitize=undefined -fsanitize=thread )
+( usefull warnings: -ansi -std=c89 -std=c++98 -pedantic -Wstrict-prototypes -g3 -Wall -Wextra -Wdouble-promotion -Wconversion -Wno-sign-conversion -Wno-unused-parameter -Wno-unused-function -fsanitize=undefined -fsanitize=thread )
 ( clang -fuse-ld=lld --rtlib=compiler-rt ))
 
 Windows :

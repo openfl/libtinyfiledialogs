@@ -7631,9 +7631,9 @@ frontmost of process \\\"Python\\\" to true' ''');");
 #if (defined(__cplusplus ) && __cplusplus >= 201103L) || (defined(__STDC_VERSION__) && __STDC_VERSION__ >= 199901L) || defined(__clang__)
 	sscanf(lBuff,"rgb(%hhu,%hhu,%hhu", & aoResultRGB[0], & aoResultRGB[1],& aoResultRGB[2]);
 #else
-	aoResultRGB[0] = strtol(lBuff+4, & lTmp2, 10 );
-	aoResultRGB[1] = strtol(lTmp2+1, & lTmp2, 10 );
-	aoResultRGB[2] = strtol(lTmp2+1, NULL, 10 );
+	aoResultRGB[0] = (unsigned char) strtol(lBuff+4, & lTmp2, 10 );
+	aoResultRGB[1] = (unsigned char) strtol(lTmp2+1, & lTmp2, 10 );
+	aoResultRGB[2] = (unsigned char) strtol(lTmp2+1, NULL, 10 );
 #endif
 	RGB2Hex(aoResultRGB,lBuff);
 				}
@@ -7641,9 +7641,9 @@ frontmost of process \\\"Python\\\" to true' ''');");
 #if (defined(__cplusplus ) && __cplusplus >= 201103L) || (defined(__STDC_VERSION__) && __STDC_VERSION__ >= 199901L) || defined(__clang__)
 	sscanf(lBuff,"rgba(%hhu,%hhu,%hhu",  & aoResultRGB[0], & aoResultRGB[1],& aoResultRGB[2]);
 #else
-	aoResultRGB[0] = strtol(lBuff+5, & lTmp2, 10 );
-	aoResultRGB[1] = strtol(lTmp2+1, & lTmp2, 10 );
-	aoResultRGB[2] = strtol(lTmp2+1, NULL, 10 );
+	aoResultRGB[0] = (unsigned char) strtol(lBuff+5, & lTmp2, 10 );
+	aoResultRGB[1] = (unsigned char) strtol(lTmp2+1, & lTmp2, 10 );
+	aoResultRGB[2] = (unsigned char) strtol(lTmp2+1, NULL, 10 );
 #endif
 	RGB2Hex(aoResultRGB,lBuff);
 				}
@@ -7654,9 +7654,9 @@ frontmost of process \\\"Python\\\" to true' ''');");
 #if (defined(__cplusplus ) && __cplusplus >= 201103L) || (defined(__STDC_VERSION__) && __STDC_VERSION__ >= 199901L) || defined(__clang__)
 	sscanf(lBuff,"%hhu %hhu %hhu", & aoResultRGB[0], & aoResultRGB[1],& aoResultRGB[2]);
 #else
-	aoResultRGB[0] = strtol(lBuff, & lTmp2, 10 );
-	aoResultRGB[1] = strtol(lTmp2+1, & lTmp2, 10 );
-	aoResultRGB[2] = strtol(lTmp2+1, NULL, 10 );
+	aoResultRGB[0] = (unsigned char) strtol(lBuff, & lTmp2, 10 );
+	aoResultRGB[1] = (unsigned char) strtol(lTmp2+1, & lTmp2, 10 );
+	aoResultRGB[2] = (unsigned char) strtol(lTmp2+1, NULL, 10 );
 #endif
 	RGB2Hex(aoResultRGB,lBuff);
 	}
