@@ -1,4 +1,4 @@
-/* SPDX-License-Identifier: ZLIB
+/* SPDX-License-Identifier: Zlib
 Copyright (c) 2014 - 2023 Guillaume Vareille http://ysengrin.com
 
 If you are using a C++ compiler to compile tinyfiledialogs.c (maybe renamed with the extension ".cpp")
