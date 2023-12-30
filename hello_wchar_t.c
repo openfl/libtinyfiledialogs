@@ -3,7 +3,7 @@ Copyright (c) 2014 - 2023 Guillaume Vareille http://ysengrin.com
 
 ********* TINY FILE DIALOGS OFFICIAL WEBSITE IS ON SOURCEFORGE *********
   _________
- /         \ hello_wchar_t.c v3.16 [Nov 23, 2023]
+ /         \ hello_wchar_t.c v3.16.1 [Dec 30, 2023]
  |tiny file| Hello WCHAR_T windows only file created [November 9, 2014]
  | dialogs |
  \____  ___/ http://tinyfiledialogs.sourceforge.net
@@ -48,6 +48,7 @@ misrepresented as being the original software.
 #include <stdlib.h>
 #include <stdio.h>
 #include <string.h>
+
 #include "tinyfiledialogs.h"
 
 #ifdef _MSC_VER

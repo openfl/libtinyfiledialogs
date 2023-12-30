@@ -1,4 +1,5 @@
 SPDX-License-Identifier: ZLIB
+Copyright (c) 2014 - 2023 Guillaume Vareille http://ysengrin.com
 
 ********* TINY FILE DIALOGS OFFICIAL WEBSITE IS ON SOURCEFORGE *********
 
@@ -6,7 +7,7 @@ SPDX-License-Identifier: ZLIB
          git clone http://git.code.sf.net/p/tinyfiledialogs/code tinyfd
 ***************************************************************************
 
-tiny file dialogs ( cross-platform C C++ ) v3.16 [Nov 23, 2023]
+tiny file dialogs ( cross-platform C C++ ) v3.16.1 [Dec 30, 2023]
  _________
 /         \   Tray-popup InputBox PasswordBox MessageBox Notification Beep
 |tiny file|   ColorPicker OpenFileDialog SaveFileDialog SelectFolderDialog
