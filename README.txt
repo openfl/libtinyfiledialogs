@@ -23,6 +23,12 @@ using Gnome Kde Mate Enlightenment Cinnamon Budgie Unity Lxde Lxqt Xfce
 
 Bindings for LUA, C#, dll, Fortran, Pascal, R.
 Included in LWJGL(java), Rust, Haskell, Allegrobasic.
+
+			 ________________________
+			|                        |
+			| 100% compatible C C++  |
+			|________________________|
+
  ____________________________________________________________________________
 |  ________________________________________________________________________  |
 | |  ____________________________________________________________________  | |

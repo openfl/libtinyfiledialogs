@@ -1,9 +1,6 @@
 /* SPDX-License-Identifier: Zlib
 Copyright (c) 2014 - 2023 Guillaume Vareille http://ysengrin.com
 
-If you are using a C++ compiler to compile tinyfiledialogs.c (maybe renamed with the extension ".cpp")
-then you may need to comment out << extern "C" >> bellow in this header file)
-
 ********* TINY FILE DIALOGS OFFICIAL WEBSITE IS ON SOURCEFORGE *********
   _________
  /         \ tinyfiledialogs.h v3.16.1 [Dec 30, 2023]
@@ -11,6 +8,12 @@ then you may need to comment out << extern "C" >> bellow in this header file)
  | dialogs |
  \____  ___/ http://tinyfiledialogs.sourceforge.net
       \|     git clone http://git.code.sf.net/p/tinyfiledialogs/code tinyfd
+
+			 ________________________
+			|                        |
+			| 100% compatible C C++  |
+			|________________________|
+
  ____________________________________________
 |                                            |
 |   email: tinyfiledialogs at ysengrin.com   |
@@ -60,12 +63,6 @@ misrepresented as being the original software.
 
 #ifndef TINYFILEDIALOGS_H
 #define TINYFILEDIALOGS_H
-
-#ifdef	__cplusplus
-/* if tinydialogs.c is compiled as C++ code rather than C code, you may need to comment this out
-				and the corresponding closing bracket near the end of this file. */
-extern "C" {
-#endif
 
 /******************************************************************************************************/
 /**************************************** UTF-8 on Windows ********************************************/
@@ -250,10 +247,6 @@ wchar_t * tinyfd_colorChooserW(
 		/* returns NULL on cancel */
 
 #endif /*_WIN32 */
-
-#ifdef	__cplusplus
-} /*extern "C"*/
-#endif
 
 #endif /* TINYFILEDIALOGS_H */
 
