@@ -1,12 +1,10 @@
 /* SPDX-License-Identifier: Zlib
 Copyright (c) 2014 - 2023 Guillaume Vareille http://ysengrin.com
-
-this file can be renamed with extension ".cpp" and compiled as C++.
-(you may need to comment out << extern "C" >> in the header file)
-			 ________________________
-			|                        |
-			| 100% compatible C C++  |
-			|________________________|
+ _________________________________________________________________________
+|                       100% compatible C C++                             |
+|   this file can be renamed with extension ".cpp" and compiled as C++.   |
+|    (you MAY need to comment out << extern "C" >> in the header file)    |
+|_________________________________________________________________________|
 
 ********* TINY FILE DIALOGS OFFICIAL WEBSITE IS ON SOURCEFORGE *********
   _________
