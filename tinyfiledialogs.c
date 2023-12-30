@@ -2,6 +2,7 @@
 Copyright (c) 2014 - 2023 Guillaume Vareille http://ysengrin.com
 
 this file can be renamed with extension ".cpp" and compiled as C++.
+(you may need to comment out << extern "C" >> in the header file)
 			 ________________________
 			|                        |
 			| 100% compatible C C++  |
