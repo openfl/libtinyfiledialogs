@@ -63,8 +63,10 @@ misrepresented as being the original software.
 
 #ifndef TINYFILEDIALOGS_H
 #define TINYFILEDIALOGS_H
+/* #pragma message("C or C++ ?") */
 
 #ifdef	__cplusplus
+/* #pragma message("C++") */
 /* if tinyfiledialogs.c is compiled as C++ code rather than C code, you MAY need to comment this out
 				and the corresponding closing bracket near the end of this file. */
 extern "C" {
