@@ -6,6 +6,10 @@ Copyright (c) 2014 - 2023 Guillaume Vareille http://ysengrin.com
                    http://tinyfiledialogs.sourceforge.net
          git clone http://git.code.sf.net/p/tinyfiledialogs/code tinyfd
 ***************************************************************************
+	 _____________________________________________________________
+	|                                                             |
+	| 100% compatible C C++    you can rename the .c file as .cpp |
+	|_____________________________________________________________|
 
 tiny file dialogs ( cross-platform C C++ ) v3.16.1 [Dec 30, 2023]
  _________
@@ -23,12 +27,6 @@ using Gnome Kde Mate Enlightenment Cinnamon Budgie Unity Lxde Lxqt Xfce
 
 Bindings for LUA, C#, dll, Fortran, Pascal, R.
 Included in LWJGL(java), Rust, Haskell, Allegrobasic.
-
-	 _____________________________________________________________
-	|                                                             |
-	| 100% compatible C C++    you can rename the .c file as .cpp |
-	|_____________________________________________________________|
-
  ____________________________________________________________________________
 |  ________________________________________________________________________  |
 | |  ____________________________________________________________________  | |
