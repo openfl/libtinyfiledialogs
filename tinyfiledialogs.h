@@ -1,11 +1,9 @@
 /* SPDX-License-Identifier: Zlib
 Copyright (c) 2014 - 2023 Guillaume Vareille http://ysengrin.com
- _______________________________________________________________________________
-|                        100% compatible C C++                                  |
-| If you are using a C++ compiler to compile tinyfiledialogs.c                  |
-| (maybe renamed with the extension ".cpp")                                     |
-| then you MAY need to comment out << extern "C" >> bellow in this header file) |
-|_______________________________________________________________________________|
+	 _____________________________________________________________
+	|                                                             |
+	| 100% compatible C C++    you can rename the .c file as .cpp |
+	|_____________________________________________________________|
 
 ********* TINY FILE DIALOGS OFFICIAL WEBSITE IS ON SOURCEFORGE *********
   _________
@@ -63,12 +61,8 @@ misrepresented as being the original software.
 
 #ifndef TINYFILEDIALOGS_H
 #define TINYFILEDIALOGS_H
-/* #pragma message("C or C++ ?") */
 
 #ifdef	__cplusplus
-/* #pragma message("C++") */
-/* if tinyfiledialogs.c is compiled as C++ code rather than C code, you MAY need to comment this out
-				and the corresponding closing bracket near the end of this file. */
 extern "C" {
 #endif
 

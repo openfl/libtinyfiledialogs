@@ -12,10 +12,10 @@ Copyright (c) 2014 - 2023 Guillaume Vareille http://ysengrin.com
 			 |                                            |
 			 |   email: tinyfiledialogs at ysengrin.com   |
 			 |____________________________________________|
-			  _______________________________
-			 |                               |
-			 | this file is for windows only |
-			 |_______________________________|
+	  ________________________________________________________________
+	 |                                                                |
+	 | this file is for windows only it uses wchar_t UTF-16 functions |
+	 |________________________________________________________________|
 
 If you like tinyfiledialogs, please upvote my stackoverflow answer
 https://stackoverflow.com/a/47651444
