@@ -1,9 +1,9 @@
 /* SPDX-License-Identifier: Zlib
 Copyright (c) 2014 - 2024 Guillaume Vareille http://ysengrin.com
-	 _____________________________________________________________
-	|                                                             |
-	| 100% compatible C C++   You can rename this .c file as .cpp |
-	|_____________________________________________________________|
+	 ________________________________________________________________
+	|                                                                |
+	| 100% compatible C C++  ->  You can rename this .c file as .cpp |
+	|________________________________________________________________|
 
 ********* TINY FILE DIALOGS OFFICIAL WEBSITE IS ON SOURCEFORGE *********
   _________

@@ -1,9 +1,9 @@
 /* SPDX-License-Identifier: Zlib
 Copyright (c) 2014 - 2024 Guillaume Vareille http://ysengrin.com
-	 __________________________________________________________________
-	|                                                                  |
-	| 100% compatible C C++    You can rename tinfiledialogs.c as .cpp |
-	|__________________________________________________________________|
+	 ____________________________________________________________________
+	|                                                                    |
+	| 100% compatible C C++  ->  You can rename tinfiledialogs.c as .cpp |
+	|____________________________________________________________________|
 
 ********* TINY FILE DIALOGS OFFICIAL WEBSITE IS ON SOURCEFORGE *********
   _________
