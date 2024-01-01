@@ -1,5 +1,5 @@
 SPDX-License-Identifier: Zlib
-Copyright (c) 2014 - 2023 Guillaume Vareille http://ysengrin.com
+Copyright (c) 2014 - 2024 Guillaume Vareille http://ysengrin.com
 
 ********* TINY FILE DIALOGS OFFICIAL WEBSITE IS ON SOURCEFORGE *********
 
@@ -8,10 +8,10 @@ Copyright (c) 2014 - 2023 Guillaume Vareille http://ysengrin.com
 ***************************************************************************
 	 _____________________________________________________________
 	|                                                             |
-	| 100% compatible C C++    you can rename the .c file as .cpp |
+	| 100% compatible C C++    You can rename the .c file as .cpp |
 	|_____________________________________________________________|
 
-tiny file dialogs ( cross-platform C C++ ) v3.16.1 [Dec 30, 2023]
+tiny file dialogs ( cross-platform C C++ ) v3.16.1 [Jan 1, 2024]
  _________
 /         \   Tray-popup InputBox PasswordBox MessageBox Notification Beep
 |tiny file|   ColorPicker OpenFileDialog SaveFileDialog SelectFolderDialog

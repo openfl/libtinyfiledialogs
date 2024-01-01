@@ -1,13 +1,13 @@
 /* SPDX-License-Identifier: Zlib
-Copyright (c) 2014 - 2023 Guillaume Vareille http://ysengrin.com
+Copyright (c) 2014 - 2024 Guillaume Vareille http://ysengrin.com
 	 _____________________________________________________________
 	|                                                             |
-	| 100% compatible C C++    you can rename the .c file as .cpp |
+	| 100% compatible C C++   You can rename this .c file as .cpp |
 	|_____________________________________________________________|
 
 ********* TINY FILE DIALOGS OFFICIAL WEBSITE IS ON SOURCEFORGE *********
   _________
- /         \ tinyfiledialogs.c v3.16.1 [Dec 30, 2023] zlib licence
+ /         \ tinyfiledialogs.c v3.16.1 [Jan 1, 2024] zlib licence
  |tiny file| Unique code file created [November 9, 2014]
  | dialogs |
  \____  ___/ http://tinyfiledialogs.sourceforge.net

@@ -1,13 +1,13 @@
 /* SPDX-License-Identifier: Zlib
-Copyright (c) 2014 - 2023 Guillaume Vareille http://ysengrin.com
+Copyright (c) 2014 - 2024 Guillaume Vareille http://ysengrin.com
 	 _____________________________________________________________
 	|                                                             |
-	| 100% compatible C C++    you can rename the .c file as .cpp |
+	| 100% compatible C C++    You can rename the .c file as .cpp |
 	|_____________________________________________________________|
 
 ********* TINY FILE DIALOGS OFFICIAL WEBSITE IS ON SOURCEFORGE *********
   _________
- /         \ tinyfiledialogs.h v3.16.1 [Dec 30, 2023]
+ /         \ tinyfiledialogs.h v3.16.1 [Jan 1, 2024]
  |tiny file| Unique header file created [November 9, 2014]
  | dialogs |
  \____  ___/ http://tinyfiledialogs.sourceforge.net
@@ -23,9 +23,9 @@ Copyright (c) 2014 - 2023 Guillaume Vareille http://ysengrin.com
 | |                                                                            | |
 | | on windows:                                                                | |
 | |  - for UTF-16, use the wchar_t functions at the bottom of the header file  | |
-| |  - _wfopen() requires wchar_t                                              | |
 | |                                                                            | |
-| |  - but fopen() expects MBCS (not UTF-8)                                    | |
+| |  - _wfopen() requires wchar_t                                              | |
+| |  - fopen() uses char but expects ASCII or MBCS (not UTF-8)                 | |
 | |  - if you want char to be MBCS: set tinyfd_winUtf8 to 0                    | |
 | |                                                                            | |
 | |  - alternatively, tinyfiledialogs provides                                 | |
