@@ -6,10 +6,10 @@ Copyright (c) 2014 - 2024 Guillaume Vareille http://ysengrin.com
                    http://tinyfiledialogs.sourceforge.net
          git clone http://git.code.sf.net/p/tinyfiledialogs/code tinyfd
 ***************************************************************************
-	 _____________________________________________________________
-	|                                                             |
-	| 100% compatible C C++    You can rename the .c file as .cpp |
-	|_____________________________________________________________|
+	 __________________________________________________________________
+	|                                                                  |
+	| 100% compatible C C++    You can rename tinfiledialogs.c as .cpp |
+	|__________________________________________________________________|
 
 tiny file dialogs ( cross-platform C C++ ) v3.16.1 [Jan 1, 2024]
  _________
