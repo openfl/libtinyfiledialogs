@@ -5205,7 +5205,7 @@ my \\$notificationsObject = \\$notificationsService->get_object('/org/freedeskto
 		pclose( lIn ) ;
 
 		/* printf( "lBuff: %s len: %lu \n" , lBuff , strlen(lBuff) ) ; */
-		if ( lBuff[strlen( lBuff ) -1] == '\n' )
+		if ( strlen( lBuff ) && lBuff[strlen( lBuff ) -1] == '\n' )
 		{
 				lBuff[strlen( lBuff ) -1] = '\0' ;
 		}
@@ -6013,7 +6013,7 @@ frontmost of process \\\"Python\\\" to true' ''');");
 
 		/* printf( "len Buff: %lu\n" , strlen(lBuff) ) ; */
 		/* printf( "lBuff0: %s\n" , lBuff ) ; */
-		if ( lBuff[strlen( lBuff ) -1] == '\n' )
+		if ( strlen( lBuff ) && lBuff[strlen( lBuff ) -1] == '\n' )
 		{
 				lBuff[strlen( lBuff ) -1] = '\0' ;
 		}
@@ -7332,7 +7332,7 @@ frontmost of process \\\"Python\\\" to true' ''');");
 		while ( fgets( lBuff , sizeof( lBuff ) , lIn ) != NULL )
 		{}
 		pclose( lIn ) ;
-	if ( lBuff[strlen( lBuff ) -1] == '\n' )
+	if ( strlen( lBuff ) && lBuff[strlen( lBuff ) -1] == '\n' )
 	{
 		lBuff[strlen( lBuff ) -1] = '\0' ;
 	}
