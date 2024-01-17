@@ -3912,28 +3912,33 @@ int tfd_shellementaryPresent(void)
 
 int tfd_xpropPresent(void)
 {
-	static int lXpropPresent = -1 ;
+	static int lXpropReady = 0 ;
+	static int lXpropDetected = -1 ;
 	char lBuff[MAX_PATH_OR_CMD] ;
 	FILE * lIn ;
 
-	if ( lXpropPresent < 0 )
+	if ( lXpropDetected < 0 )
 	{
-		lXpropPresent = detectPresence("xprop") ;
-		if ( lXpropPresent )
-		{
-			lIn = popen( "xprop -root 32x '	$0' _NET_ACTIVE_WINDOW" , "r" ) ;
-			if ( fgets( lBuff , sizeof( lBuff ) , lIn ) != NULL )
-			{
-				if ( strstr( lBuff , "not found" ) )
-				{
-					lXpropPresent = 0 ;
-					if (tinyfd_verbose) printf("xprop is not ready\n");
-				}
-			}
-			pclose( lIn ) ;
-		}
+		lXpropDetected = detectPresence("xprop") ;
 	}
-	return graphicMode() ? lXpropPresent : 0 ;
+		
+	if ( lXpropDetected && ! lXpropReady )
+	{
+		lIn = popen( "xprop -root 32x '	$0' _NET_ACTIVE_WINDOW" , "r" ) ;
+		if ( fgets( lBuff , sizeof( lBuff ) , lIn ) != NULL )
+		{
+			if ( strstr( lBuff , "not found" ) )
+			{
+				if (tinyfd_verbose) printf("xprop is not ready\n");
+			}
+			else
+			{
+				lXpropReady = 1 ;
+			}
+		}
+		pclose( lIn ) ;
+	}
+	return graphicMode() ? ( lXpropReady ) : 0 ;
 }
 
 
