@@ -3923,7 +3923,7 @@ int tfd_xpropPresent(void)
 	}
 		
 	if ( !lXpropReady && lXpropDetected )
-	{
+	{	/* xwayland Debian issue reported by Kay F. Jahnke and solved with his help */
 		lIn = popen( "xprop -root 32x '	$0' _NET_ACTIVE_WINDOW" , "r" ) ;
 		if ( fgets( lBuff , sizeof( lBuff ) , lIn ) != NULL )
 		{
