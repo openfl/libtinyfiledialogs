@@ -3935,7 +3935,7 @@ int tfd_xpropPresent(void)
 		}
 		pclose( lIn ) ;
 	}
-	return graphicMode() ? ( lXpropReady ) : 0 ;
+	return graphicMode() ? lXpropReady : 0 ;
 }
 
 
