@@ -3927,12 +3927,9 @@ int tfd_xpropPresent(void)
 		lIn = popen( "xprop -root 32x '	$0' _NET_ACTIVE_WINDOW" , "r" ) ;
 		if ( fgets( lBuff , sizeof( lBuff ) , lIn ) != NULL )
 		{
-			if ( strstr( lBuff , "not found" ) )
+			if ( ! strstr( lBuff , "not found" ) )
 			{
-				if (tinyfd_verbose) printf("xprop is not ready\n");
-			}
-			else
-			{
+				if (tinyfd_verbose) printf("xprop is ready\n");
 				lXpropReady = 1 ;
 			}
 		}
