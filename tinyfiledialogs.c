@@ -7,7 +7,7 @@ Copyright (c) 2014 - 2024 Guillaume Vareille http://ysengrin.com
 
 ********* TINY FILE DIALOGS OFFICIAL WEBSITE IS ON SOURCEFORGE *********
   _________
- /         \ tinyfiledialogs.c v3.16.2 [Jan 16, 2024] zlib licence
+ /         \ tinyfiledialogs.c v3.16.3 [Jan 17, 2024] zlib licence
  |tiny file| Unique code file created [November 9, 2014]
  | dialogs |
  \____  ___/ http://tinyfiledialogs.sourceforge.net
@@ -105,7 +105,7 @@ misrepresented as being the original software.
 #endif
 #define LOW_MULTIPLE_FILES 32
 
-char tinyfd_version[8] = "3.16.2";
+char tinyfd_version[8] = "3.16.3";
 
 /******************************************************************************************************/
 /**************************************** UTF-8 on Windows ********************************************/
@@ -3912,12 +3912,28 @@ int tfd_shellementaryPresent(void)
 
 int tfd_xpropPresent(void)
 {
-		static int lXpropPresent = -1 ;
-		if ( lXpropPresent < 0 )
+	static int lXpropPresent = -1 ;
+	char lBuff[MAX_PATH_OR_CMD] ;
+	FILE * lIn ;
+
+	if ( lXpropPresent < 0 )
+	{
+		lXpropPresent = detectPresence("xprop") ;
+		if ( lXpropPresent )
 		{
-				lXpropPresent = detectPresence("xprop") ;
+			lIn = popen( "xprop -root 32x '	$0' _NET_ACTIVE_WINDOW" , "r" ) ;
+			if ( fgets( lBuff , sizeof( lBuff ) , lIn ) != NULL )
+			{
+				if ( strstr( lBuff , "not found" ) )
+				{
+					lXpropPresent = 0 ;
+					if (tinyfd_verbose) printf("xprop is not ready\n");
+				}
+			}
+			pclose( lIn ) ;
 		}
-		return lXpropPresent && graphicMode( ) ;
+	}
+	return graphicMode() ? lXpropPresent : 0 ;
 }
 
 
@@ -3960,16 +3976,16 @@ int tfd_zenity3Present(void)
 						{
 								if ( atoi(lBuff) >= 3 )
 								{
-										lZenity3Present = 3 ;
-																				lIntTmp = atoi(strtok(lBuff,".")+2 ) ;
-																				if ( lIntTmp >= 18 )
-																				{
-																						lZenity3Present = 5 ;
-																				}
-																				else if ( lIntTmp >= 10 )
-																				{
-																						lZenity3Present = 4 ;
-																				}
+									lZenity3Present = 3 ;
+									lIntTmp = atoi(strtok(lBuff,".")+2 ) ;
+									if ( lIntTmp >= 18 )
+									{
+											lZenity3Present = 5 ;
+									}
+									else if ( lIntTmp >= 10 )
+									{
+											lZenity3Present = 4 ;
+									}
 																}
 								else if ( ( atoi(lBuff) == 2 ) && ( atoi(strtok(lBuff,".")+2 ) >= 32 ) )
 								{
