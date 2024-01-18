@@ -3,7 +3,7 @@ Copyright (c) 2014 - 2024 Guillaume Vareille http://ysengrin.com
 
 ********* TINY FILE DIALOGS OFFICIAL WEBSITE IS ON SOURCEFORGE *********
   _________
- /         \ hello.c v3.16.3 [Jan 17, 2024]
+ /         \ hello.c v3.17 [Jan 18, 2024]
  |tiny file| Hello World file created [November 9, 2014]
  | dialogs |
  \____  ___/ http://tinyfiledialogs.sourceforge.net
@@ -148,7 +148,7 @@ quit [Cancel]",
 
 	lTheSaveFileName = tinyfd_saveFileDialog(
 		"let us save this password",
-		"../../passwordFile.txt",
+		"../passwordFile.txt",
 		2,
 		lFilterPatterns,
 		NULL);
@@ -186,11 +186,11 @@ quit [Cancel]",
 
 	lTheOpenFileName = tinyfd_openFileDialog(
 		"let us read the password back",
-		"",
+		"../",
 		2,
 		lFilterPatterns,
 		"text files",
-		0);
+		1);
 
 	if (! lTheOpenFileName)
 	{
@@ -228,7 +228,10 @@ quit [Cancel]",
 	tinyfd_messageBox("your password as it was saved", lBuffer, "ok", "info", 1);
 
 	lTheSelectFolderName = tinyfd_selectFolderDialog(
-		"let us just select a directory", NULL);
+		"let us just select a directory", "../../");
+
+	lTheSelectFolderName = tinyfd_selectFolderDialog(
+		"let us just select a directory 2", NULL);
 
 	if (!lTheSelectFolderName)
 	{

@@ -11,7 +11,7 @@ Copyright (c) 2014 - 2024 Guillaume Vareille http://ysengrin.com
   | 100% compatible C C++  ->  You can rename tinfiledialogs.c as .cpp |
   |____________________________________________________________________|
 
-tiny file dialogs ( cross-platform C C++ ) v3.16.3 [Jan 17, 2024]
+tiny file dialogs ( cross-platform C C++ ) v3.17 [Jan 18, 2024]
  _________
 /         \   Tray-popup InputBox PasswordBox MessageBox Notification Beep
 |tiny file|   ColorPicker OpenFileDialog SaveFileDialog SelectFolderDialog
@@ -102,7 +102,7 @@ char const * tinyfd_inputBox(
 
 char const * tinyfd_saveFileDialog(
     char const * aTitle , // NULL or ""
-    char const * aDefaultPathAndFile , // NULL or ""
+    char const * aDefaultPathAndOrFile , // NULL or "" , ends with / to set only a directory
     int aNumOfFilterPatterns , // 0 (1 in the following example)
     char const * const * aFilterPatterns , // NULL or char const * lFilterPatterns[1]={"*.txt"};
     char const * aSingleFilterDescription ); // NULL or "text files"
@@ -110,7 +110,7 @@ char const * tinyfd_saveFileDialog(
 
 char const * tinyfd_openFileDialog(
     char const * aTitle , // NULL or ""
-    char const * aDefaultPathAndFile , // NULL or ""
+    char const * aDefaultPathAndOrFile , // NULL or "" , ends with / to set only a directory
     int aNumOfFilterPatterns , // 0 (2 in the following example)
     char const * const * aFilterPatterns , // NULL or char const * lFilterPatterns[2]={"*.png","*.jpg"};
     char const * aSingleFilterDescription , // NULL or "image files"
