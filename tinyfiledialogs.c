@@ -7,7 +7,7 @@ Copyright (c) 2014 - 2024 Guillaume Vareille http://ysengrin.com
 
 ********* TINY FILE DIALOGS OFFICIAL WEBSITE IS ON SOURCEFORGE *********
   _________
- /         \ tinyfiledialogs.c v3.17 [Jan 18, 2024] zlib licence
+ /         \ tinyfiledialogs.c v3.17.1 [Jan 18, 2024] zlib licence
  |tiny file| Unique code file created [November 9, 2014]
  | dialogs |
  \____  ___/ http://tinyfiledialogs.sourceforge.net
@@ -105,7 +105,7 @@ misrepresented as being the original software.
 #endif
 #define LOW_MULTIPLE_FILES 32
 
-char tinyfd_version[8] = "3.17";
+char tinyfd_version[8] = "3.17.1";
 
 /******************************************************************************************************/
 /**************************************** UTF-8 on Windows ********************************************/
@@ -3647,6 +3647,16 @@ static int graphicMode(void)
 }
 
 
+static int ffplayPresent(void)
+{
+   static int lFFplayPresent = -1;
+   if (lFFplayPresent < 0)
+   {
+	  lFFplayPresent = detectPresence("ffplay");
+   }
+   return lFFplayPresent;
+}
+
 static int pactlPresent(void)
 {
 		static int lPactlPresent = -1 ;
@@ -4215,6 +4225,10 @@ void tinyfd_beep(void)
 				{
 						strcpy( lDialogString , "osascript -e 'tell application \"System Events\" to beep'") ;
 				}
+		}
+		else if ( ffplayPresent() )
+		{
+		    strcpy(lDialogString, "ffplay -f lavfi -i sine=f=440:d=0.15 -autoexit -nodisp" );
 		}
 		else if ( pactlPresent() )
 		{
