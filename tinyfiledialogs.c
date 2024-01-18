@@ -4265,7 +4265,7 @@ void tinyfd_beep(void)
 				pclose( lIn ) ;
 		}
 
-		if ( pactlPresent() )
+		if ( !ffplayPresent() && pactlPresent() )
 		{
 				signal(SIGINT, SIG_DFL);
 		}
