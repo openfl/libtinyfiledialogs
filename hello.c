@@ -148,7 +148,7 @@ quit [Cancel]",
 
 	lTheSaveFileName = tinyfd_saveFileDialog(
 		"let us save this password",
-		"../passwordFile.txt",
+		"./passwordFile.txt",
 		2,
 		lFilterPatterns,
 		NULL);
@@ -229,9 +229,6 @@ quit [Cancel]",
 
 	lTheSelectFolderName = tinyfd_selectFolderDialog(
 		"let us just select a directory", "../../");
-
-	lTheSelectFolderName = tinyfd_selectFolderDialog(
-		"let us just select a directory 2", NULL);
 
 	if (!lTheSelectFolderName)
 	{
