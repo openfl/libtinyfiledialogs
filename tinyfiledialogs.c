@@ -7,7 +7,7 @@ Copyright (c) 2014 - 2024 Guillaume Vareille http://ysengrin.com
 
 ********* TINY FILE DIALOGS OFFICIAL WEBSITE IS ON SOURCEFORGE *********
   _________
- /         \ tinyfiledialogs.c v3.17.1 [Jan 18, 2024] zlib licence
+ /         \ tinyfiledialogs.c v3.17.2 [Jan 19, 2024] zlib licence
  |tiny file| Unique code file created [November 9, 2014]
  | dialogs |
  \____  ___/ http://tinyfiledialogs.sourceforge.net
@@ -105,7 +105,7 @@ misrepresented as being the original software.
 #endif
 #define LOW_MULTIPLE_FILES 32
 
-char tinyfd_version[8] = "3.17.1";
+char tinyfd_version[8] = "3.17.2";
 
 /******************************************************************************************************/
 /**************************************** UTF-8 on Windows ********************************************/
@@ -3657,14 +3657,28 @@ static int ffplayPresent(void)
    return lFFplayPresent;
 }
 
-static int pactlPresent(void)
+
+static int pactlPresent( void )
 {
-		static int lPactlPresent = -1 ;
-		if ( lPactlPresent < 0 )
+	static int lPactlPresent = -1 ;
+	char lBuff [256] ;
+	FILE * lIn ;
+
+	if ( lPactlPresent < 0 )
+	{
+		lPactlPresent = detectPresence("pactl") ;
+		if ( lPactlPresent )
 		{
-				lPactlPresent = detectPresence("pactl") ;
+			lIn = popen( "pactl info | grep PipeWire" , "r" ) ;
+			if ( fgets( lBuff , sizeof( lBuff ) , lIn ) )
+			{
+				lPactlPresent = 0 ;
+			}
+			pclose( lIn ) ;
+			if (tinyfd_verbose) printf("is pactl using pulseaudio ? %d\n", lPactlPresent);
 		}
-		return lPactlPresent ;
+	}
+	return lPactlPresent ;
 }
 
 
@@ -4202,20 +4216,27 @@ notify=dbus.Interface(notif,'org.freedesktop.Notifications');\nexcept:\n\tprint(
 
 static void sigHandler(int signum)
 {
-		FILE * lIn ;
-		if ( ( lIn = popen( "pactl unload-module module-sine" , "r" ) ) )
-		{
-				pclose( lIn ) ;
-		}
-				if (tinyfd_verbose) printf("tinyfiledialogs caught signal %d\n", signum);
+    FILE * lIn ;
+    if ( ( lIn = popen( "pactl unload-module module-sine" , "r" ) ) )
+    {
+        pclose( lIn ) ;
+    }
+    if (tinyfd_verbose) printf("tinyfiledialogs caught signal %d\n", signum);
 }
+
 
 void tinyfd_beep(void)
 {
 		char lDialogString[256] ;
 		FILE * lIn ;
 
-		if ( osascriptPresent() )
+		if ( pactlPresent() )
+		{
+				signal(SIGINT, sigHandler);
+				/*strcpy( lDialogString , "pactl load-module module-sine frequency=440;sleep .3;pactl unload-module module-sine" ) ;*/
+				strcpy( lDialogString , "thnum=$(pactl load-module module-sine frequency=440);sleep .3;pactl unload-module $thnum" ) ;
+		}
+		else if ( osascriptPresent() )
 		{
 				if ( afplayPresent() >= 2 )
 				{
@@ -4226,20 +4247,14 @@ void tinyfd_beep(void)
 						strcpy( lDialogString , "osascript -e 'tell application \"System Events\" to beep'") ;
 				}
 		}
-		else if ( ffplayPresent() )
-		{
-		    strcpy(lDialogString, "ffplay -f lavfi -i sine=f=440:d=0.15 -autoexit -nodisp" );
-		}
-		else if ( pactlPresent() )
-		{
-				signal(SIGINT, sigHandler);
-				/*strcpy( lDialogString , "pactl load-module module-sine frequency=440;sleep .3;pactl unload-module module-sine" ) ;*/
-				strcpy( lDialogString , "thnum=$(pactl load-module module-sine frequency=440);sleep .3;pactl unload-module $thnum" ) ;
-		}
 		else if ( speakertestPresent() )
 		{
 				/*strcpy( lDialogString , "timeout -k .3 .3 speaker-test --frequency 440 --test sine > /dev/tty" ) ;*/
 				strcpy( lDialogString , "( speaker-test -t sine -f 440 > /dev/tty )& pid=$!;sleep .5; kill -9 $pid" ) ; /*.3 was too short for mac g3*/
+		}
+		else if ( ffplayPresent() )
+		{
+		    strcpy(lDialogString, "ffplay -f lavfi -i sine=f=440:d=0.15 -autoexit -nodisp" );
 		}
 		else if (beepexePresent())
 		{
@@ -4265,7 +4280,7 @@ void tinyfd_beep(void)
 				pclose( lIn ) ;
 		}
 
-		if ( !ffplayPresent() && pactlPresent() )
+		if ( pactlPresent() )
 		{
 				signal(SIGINT, SIG_DFL);
 		}
