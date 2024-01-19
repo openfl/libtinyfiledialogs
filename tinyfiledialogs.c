@@ -3693,7 +3693,7 @@ static int speakertestPresent(void)
 }
 
 
-static int playPresent(void)
+static int playPresent(void) /* play is part of sox */
 {
    static int lPlayPresent = -1;
    if (lPlayPresent < 0)
@@ -3723,6 +3723,36 @@ static int beepPresent(void)
 				lBeepPresent = detectPresence("beep") ;
 		}
 		return lBeepPresent ;
+}
+
+
+static int playsoundPresent(void) /* playsound is part of pipewire */
+{
+    static int lPlaysoundPresent = -1 ;
+    if (lPlaysoundPresent < 0)
+    {
+        lPlaysoundPresent = detectPresence("playsound_simple");
+        if ( lPlaysoundPresent && ! fileExists("/usr/share/sounds/freedesktop/stereo/bell.oga") )
+        {
+            lPlaysoundPresent = 0 ;
+        }
+    }
+    return lPlaysoundPresent;
+}
+
+
+static int paplayPresent(void) /* playsound is part of pipewire */
+{
+    static int lPaplayPresent = -1 ;
+    if (lPaplayPresent < 0)
+    {
+        lPaplayPresent = detectPresence("paplay");
+        if ( lPaplayPresent && ! fileExists("/usr/share/sounds/freedesktop/stereo/bell.oga") )
+        {
+            lPaplayPresent = 0 ;
+        }
+    }
+    return lPaplayPresent;
 }
 
 
@@ -4028,54 +4058,54 @@ int tfd_zenity3Present(void)
 
 int tfd_kdialogPresent(void)
 {
-		static int lKdialogPresent = -1 ;
-		char lBuff[MAX_PATH_OR_CMD] ;
-		FILE * lIn ;
-		char * lDesktop;
+    static int lKdialogPresent = -1 ;
+    char lBuff[MAX_PATH_OR_CMD] ;
+    FILE * lIn ;
+    char * lDesktop;
 
-		if ( lKdialogPresent < 0 )
-		{
-				if ( tfd_zenityPresent() )
-				{
-						lDesktop = getenv("XDG_SESSION_DESKTOP");
-						if ( !lDesktop  || ( strcmp(lDesktop, "KDE") && strcmp(lDesktop, "lxqt") ) )
-						{
-								lKdialogPresent = 0 ;
-								return lKdialogPresent ;
-						}
-				}
+    if ( lKdialogPresent < 0 )
+    {
+        lDesktop = getenv("XDG_SESSION_DESKTOP");
+        if ( !lDesktop  || ( strcmp(lDesktop, "KDE") && strcmp(lDesktop, "lxqt") ) )
+        {
+            if ( tfd_zenityPresent() )
+            {
+                lKdialogPresent = 0 ;
+                return lKdialogPresent ;
+            }
+        }
 
-				lKdialogPresent = detectPresence("kdialog") ;
-				if ( lKdialogPresent && !getenv("SSH_TTY") )
-				{
-						lIn = popen( "kdialog --attach 2>&1" , "r" ) ;
-						if ( fgets( lBuff , sizeof( lBuff ) , lIn ) != NULL )
-						{
-								if ( ! strstr( "Unknown" , lBuff ) )
-								{
-										lKdialogPresent = 2 ;
-										if (tinyfd_verbose) printf("kdialog-attach %d\n", lKdialogPresent);
-								}
-						}
-						pclose( lIn ) ;
+        lKdialogPresent = detectPresence("kdialog") ;
+        if ( lKdialogPresent && !getenv("SSH_TTY") )
+        {
+            lIn = popen( "kdialog --attach 2>&1" , "r" ) ;
+            if ( fgets( lBuff , sizeof( lBuff ) , lIn ) != NULL )
+            {
+                if ( ! strstr( "Unknown" , lBuff ) )
+                {
+                    lKdialogPresent = 2 ;
+                    if (tinyfd_verbose) printf("kdialog-attach %d\n", lKdialogPresent);
+                }
+            }
+            pclose( lIn ) ;
 
-						if (lKdialogPresent == 2)
-						{
-								lKdialogPresent = 1 ;
-								lIn = popen( "kdialog --passivepopup 2>&1" , "r" ) ;
-								if ( fgets( lBuff , sizeof( lBuff ) , lIn ) != NULL )
-								{
-										if ( ! strstr( "Unknown" , lBuff ) )
-										{
-												lKdialogPresent = 2 ;
-												if (tinyfd_verbose) printf("kdialog-popup %d\n", lKdialogPresent);
-										}
-								}
-								pclose( lIn ) ;
-						}
-				}
-		}
-		return graphicMode() ? lKdialogPresent : 0 ;
+            if (lKdialogPresent == 2)
+            {
+                lKdialogPresent = 1 ;
+                lIn = popen( "kdialog --passivepopup 2>&1" , "r" ) ;
+                if ( fgets( lBuff , sizeof( lBuff ) , lIn ) != NULL )
+                {
+                    if ( ! strstr( "Unknown" , lBuff ) )
+                    {
+                        lKdialogPresent = 2 ;
+                        if (tinyfd_verbose) printf("kdialog-popup %d\n", lKdialogPresent);
+                    }
+                }
+                pclose( lIn ) ;
+            }
+        }
+    }
+    return graphicMode() ? lKdialogPresent : 0 ;
 }
 
 
@@ -4227,63 +4257,71 @@ static void sigHandler(int signum)
 
 void tinyfd_beep(void)
 {
-		char lDialogString[256] ;
-		FILE * lIn ;
+    char lDialogString[256] ;
+    FILE * lIn ;
 
-		if ( pactlPresent() )
-		{
-				signal(SIGINT, sigHandler);
-				/*strcpy( lDialogString , "pactl load-module module-sine frequency=440;sleep .3;pactl unload-module module-sine" ) ;*/
-				strcpy( lDialogString , "thnum=$(pactl load-module module-sine frequency=440);sleep .3;pactl unload-module $thnum" ) ;
-		}
-		else if ( osascriptPresent() )
-		{
-				if ( afplayPresent() >= 2 )
-				{
-						strcpy( lDialogString , "afplay /System/Library/Sounds/Ping.aiff") ;
-				}
-				else
-				{
-						strcpy( lDialogString , "osascript -e 'tell application \"System Events\" to beep'") ;
-				}
-		}
-		else if ( speakertestPresent() )
-		{
-				/*strcpy( lDialogString , "timeout -k .3 .3 speaker-test --frequency 440 --test sine > /dev/tty" ) ;*/
-				strcpy( lDialogString , "( speaker-test -t sine -f 440 > /dev/tty )& pid=$!;sleep .5; kill -9 $pid" ) ; /*.3 was too short for mac g3*/
-		}
-		else if ( ffplayPresent() )
-		{
-		    strcpy(lDialogString, "ffplay -f lavfi -i sine=f=440:d=0.15 -autoexit -nodisp" );
-		}
-		else if (beepexePresent())
-		{
-				strcpy(lDialogString, "beep.exe 440 300");
-		}
-		else if (playPresent()) /* play is part of sox */
-		{
-				strcpy(lDialogString, "play -q -n synth .3 sine 440");
-		}
-		else if ( beepPresent() )
-		{
-				strcpy( lDialogString , "beep -f 440 -l 300" ) ;
-		}
-		else
-		{
-				strcpy( lDialogString , "printf '\\a' > /dev/tty" ) ;
-		}
+    if ( pactlPresent() )
+    {
+        signal(SIGINT, sigHandler);
+        strcpy( lDialogString ,
+            "thnum=$(pactl load-module module-sine frequency=440);sleep .3;pactl unload-module $thnum" ) ;
+    }
+    else if ( osascriptPresent() )
+    {
+        if ( afplayPresent() >= 2 )
+        {
+            strcpy( lDialogString , "afplay /System/Library/Sounds/Ping.aiff") ;
+        }
+        else
+        {
+            strcpy( lDialogString , "osascript -e 'tell application \"System Events\" to beep'") ;
+        }
+    }
+    else if ( speakertestPresent() )
+    {
+        /*strcpy( lDialogString , "timeout -k .3 .3 speaker-test --frequency 440 --test sine > /dev/tty" ) ;*/
+        strcpy( lDialogString , "( speaker-test -t sine -f 440 > /dev/tty )& pid=$!;sleep .5; kill -9 $pid" ) ; /*.3 was too short for mac g3*/
+    }
+    else if ( ffplayPresent() )
+    {
+        strcpy(lDialogString, "ffplay -f lavfi -i sine=f=440:d=0.15 -autoexit -nodisp" );
+    }
+    else if (playPresent()) /* play is part of sox */
+    {
+        strcpy(lDialogString, "play -q -n synth .3 sine 440");
+    }
+    else if ( playsoundPresent() )
+    {
+        strcpy( lDialogString , "playsound_simple /usr/share/sounds/freedesktop/stereo/bell.oga") ;
+    }
+    else if ( paplayPresent() )
+    {
+        strcpy( lDialogString , "paplay /usr/share/sounds/freedesktop/stereo/bell.oga") ;
+    }
+    else if (beepexePresent())
+    {
+        strcpy(lDialogString, "beep.exe 440 300");
+    }
+    /*else if ( beepPresent() )
+    {
+        strcpy( lDialogString , "beep -f 440 -l 300" ) ;
+    }*/
+    else
+    {
+        strcpy( lDialogString , "printf '\\a' > /dev/tty" ) ;
+    }
 
-		if (tinyfd_verbose) printf( "lDialogString: %s\n" , lDialogString ) ;
+    if (tinyfd_verbose) printf( "lDialogString: %s\n" , lDialogString ) ;
 
-		if ( ( lIn = popen( lDialogString , "r" ) ) )
-		{
-				pclose( lIn ) ;
-		}
+    if ( ( lIn = popen( lDialogString , "r" ) ) )
+    {
+            pclose( lIn ) ;
+    }
 
-		if ( pactlPresent() )
-		{
-				signal(SIGINT, SIG_DFL);
-		}
+    if ( pactlPresent() )
+    {
+            signal(SIGINT, SIG_DFL);
+    }
 }
 
 
