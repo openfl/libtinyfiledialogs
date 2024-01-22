@@ -3669,14 +3669,10 @@ static int pactlPresent( void )
 		lPactlPresent = detectPresence("pactl") ;
 		if ( lPactlPresent )
 		{
-			lIn = popen( "pactl info | grep PipeWire" , "r" ) ;
-			if ( fgets( lBuff , sizeof( lBuff ) , lIn )
-			  || strstr(lBuff, "failure") )
-			{
-				lPactlPresent = 0 ;
-			}
-			pclose( lIn ) ;
-			if (tinyfd_verbose) printf("is pactl using pulseaudio ? %d\n", lPactlPresent);
+			lIn = popen( "pactl info | grep -F PipeWire" , "r" ) ;
+			if ( fgets( lBuff , sizeof( lBuff ) , lIn ) ) lPactlPresent = 0 ;
+			if WIFEXITED( pclose( lIn ) ) lPactlPresent = 0 ;
+			if (tinyfd_verbose) printf("is pactl valid ? %d\n", lPactlPresent);
 		}
 	}
 	return lPactlPresent ;
