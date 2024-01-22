@@ -3663,27 +3663,22 @@ static int pactlPresent( void )
 	static int lPactlPresent = -1 ;
 	char lBuff [256] ;
 	FILE * lIn ;
-	int lExitStatus ;
 
 	if ( lPactlPresent < 0 )
 	{
 		lPactlPresent = detectPresence("pactl") ;
 		if ( lPactlPresent )
 		{
-			lIn = popen( "pactl info | grep -iF PipeWire" , "r" ) ;
-			if ( fgets( lBuff , sizeof( lBuff ) , lIn ) )
+			lIn = popen( "pactl info | grep -iF pulseaudio" , "r" ) ;
+			if ( ! fgets( lBuff , sizeof( lBuff ) , lIn ) )
 			{
 				lPactlPresent = 0 ;
 			}
-			else
+			else if ( strstr(lBuff, "PipeWire") )
 			{
-				pclose( lIn ) ;
-				lIn = popen( "pactl info | grep -iF pulseaudio" , "r" ) ;
-				if ( ! fgets( lBuff , sizeof( lBuff ) , lIn ) )
-				{
-					lPactlPresent = 0 ;
-				}
+				lPactlPresent = 0 ;
 			}
+			else {}
 			pclose( lIn ) ;
 			if (tinyfd_verbose) printf("is pactl valid ? %d\n", lPactlPresent);
 		}
