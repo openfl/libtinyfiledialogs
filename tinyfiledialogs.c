@@ -3673,17 +3673,13 @@ static int pactlPresent( void )
 			lIn = popen( "pactl info | grep -F PipeWire" , "r" ) ;
 			if ( fgets( lBuff , sizeof( lBuff ) , lIn ) )
 			{
+				printf("lBuff1: %s \n", lBuff);
 				lPactlPresent = 0 ;
 			}
 			else
 			{
-				pclose( lIn ) ;
-				lIn = popen( "pactl info | grep -F PulseAudio" , "r" ) ;
-				if ( fgets( lBuff , sizeof( lBuff ) , lIn ) )
-				{
-					printf("lBuff %s \n", lBuff);
-					lPactlPresent = 0 ;
-				}
+				printf("lBuff2: %s \n", lBuff);
+				lPactlPresent = 0 ;
 			}
 			pclose( lIn ) ;
 			if (tinyfd_verbose) printf("is pactl valid ? %d\n", lPactlPresent);
