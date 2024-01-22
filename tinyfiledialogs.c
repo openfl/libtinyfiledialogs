@@ -3672,8 +3672,12 @@ static int pactlPresent( void )
 		{
 			lIn = popen( "pactl info | grep -F PipeWire" , "r" ) ;
 			if ( fgets( lBuff , sizeof( lBuff ) , lIn ) ) lPactlPresent = 0 ;
-			lExitStatus = WIFEXITED( pclose( lIn ) ) ;
-			if  ( lPactlPresent && lExitStatus && WEXITSTATUS(lExitStatus) ) lPactlPresent = 0 ;
+			lExitStatus = pclose( lIn ) ;
+			if  ( lPactlPresent && WIFEXITED( lExitStatus ) && WEXITSTATUS(lExitStatus) )
+			{
+				//printf("lExitStatus %i \n" , WEXITSTATUS(lExitStatus) ) ;
+				lPactlPresent = 0 ;
+			}
 			if (tinyfd_verbose) printf("is pactl valid ? %d\n", lPactlPresent);
 		}
 	}
