@@ -3670,7 +3670,8 @@ static int pactlPresent( void )
 		if ( lPactlPresent )
 		{
 			lIn = popen( "pactl info | grep PipeWire" , "r" ) ;
-			if ( fgets( lBuff , sizeof( lBuff ) , lIn ) )
+			if ( fgets( lBuff , sizeof( lBuff ) , lIn )
+			  || strstr(lBuff, "failure") )
 			{
 				lPactlPresent = 0 ;
 			}
