@@ -3677,6 +3677,7 @@ static int pactlPresent( void )
 			}
 			else
 			{
+				printf("lBuff %s \n", lBuff);
 				pclose( lIn ) ;
 				lIn = popen( "pactl info | grep -F PulseAudio" , "r" ) ;
 				if ( ! fgets( lBuff , sizeof( lBuff ) , lIn ) )
