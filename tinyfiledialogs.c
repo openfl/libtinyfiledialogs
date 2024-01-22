@@ -3670,24 +3670,17 @@ static int pactlPresent( void )
 		lPactlPresent = detectPresence("pactl") ;
 		if ( lPactlPresent )
 		{
-			lIn = popen( "pactl info | grep -F PipeWire" , "r" ) ;
+			lIn = popen( "pactl info | grep -iF PipeWire" , "r" ) ;
 			if ( fgets( lBuff , sizeof( lBuff ) , lIn ) )
 			{
-				printf("lBuff1: %s \n", lBuff);
 				lPactlPresent = 0 ;
 			}
 			else
 			{
 				pclose( lIn ) ;
-				lIn = popen( "pactl info | grep -F pulseaudio" , "r" ) ;
-				if ( fgets( lBuff , sizeof( lBuff ) , lIn ) )
+				lIn = popen( "pactl info | grep -iF pulseaudio" , "r" ) ;
+				if ( ! fgets( lBuff , sizeof( lBuff ) , lIn ) )
 				{
-					printf("lBuff2: %s \n", lBuff);
-					lPactlPresent = 0 ;
-				}
-				else
-				{
-					printf("lBuff3: %s \n", lBuff);
 					lPactlPresent = 0 ;
 				}
 			}
