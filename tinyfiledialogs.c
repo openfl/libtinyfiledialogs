@@ -3715,7 +3715,7 @@ static int beepexePresent(void)
 }
 
 
-static int beepPresent(void)
+/*static int beepPresent(void)
 {
 		static int lBeepPresent = -1 ;
 		if ( lBeepPresent < 0 )
@@ -3723,7 +3723,7 @@ static int beepPresent(void)
 				lBeepPresent = detectPresence("beep") ;
 		}
 		return lBeepPresent ;
-}
+}*/
 
 
 static int playsoundPresent(void) /* playsound is part of pipewire */
