@@ -3670,15 +3670,10 @@ static int pactlPresent( void )
 		if ( lPactlPresent )
 		{
 			lIn = popen( "pactl info | grep -iF pulseaudio" , "r" ) ;
-			if ( ! fgets( lBuff , sizeof( lBuff ) , lIn ) )
+			if ( ! (fgets( lBuff , sizeof( lBuff ) , lIn ) && ! strstr(lBuff, "PipeWire") ) )
 			{
 				lPactlPresent = 0 ;
 			}
-			else if ( strstr(lBuff, "PipeWire") )
-			{
-				lPactlPresent = 0 ;
-			}
-			else {}
 			pclose( lIn ) ;
 			if (tinyfd_verbose) printf("is pactl valid ? %d\n", lPactlPresent);
 		}
