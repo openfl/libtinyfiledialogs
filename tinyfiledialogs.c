@@ -7,7 +7,7 @@ Copyright (c) 2014 - 2024 Guillaume Vareille http://ysengrin.com
 
 ********* TINY FILE DIALOGS OFFICIAL WEBSITE IS ON SOURCEFORGE *********
   _________
- /         \ tinyfiledialogs.c v3.17.3 [Jan 23, 2024] zlib licence
+ /         \ tinyfiledialogs.c v3.17.4 [Fev 10, 2024] zlib licence
  |tiny file| Unique code file created [November 9, 2014]
  | dialogs |
  \____  ___/ http://tinyfiledialogs.sourceforge.net
@@ -54,15 +54,18 @@ misrepresented as being the original software.
 */
 
 
-#ifndef __sun
-#ifndef _POSIX_C_SOURCE
-#define _POSIX_C_SOURCE 2 /* to accept POSIX 2 in old ANSI C standards */
+#if !defined(_WIN32) && ( defined(__GNUC__) || defined(__clang__) )
+#ifndef _GNU_SOURCE
+ #define _GNU_SOURCE /* used only to resolve symbolic links. Can be commented out */
+ #ifndef _POSIX_C_SOURCE
+  #define _POSIX_C_SOURCE 199506L /* freebsd needs this for realpath() */
+ #endif
 #endif
 #endif
 
-#if !defined(_WIN32) && ( defined(__GNUC__) || defined(__clang__) )
-#if !defined(_GNU_SOURCE)
- #define _GNU_SOURCE /* used only to resolve symbolic links. Can be commented out */
+#ifndef __sun
+#ifndef _POSIX_C_SOURCE
+ #define _POSIX_C_SOURCE 2 /* to accept POSIX 2 in old ANSI C standards */
 #endif
 #endif
 
@@ -105,7 +108,7 @@ misrepresented as being the original software.
 #endif
 #define LOW_MULTIPLE_FILES 32
 
-char tinyfd_version[8] = "3.17.3";
+char tinyfd_version[8] = "3.17.4";
 
 /******************************************************************************************************/
 /**************************************** UTF-8 on Windows ********************************************/
