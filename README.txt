@@ -210,14 +210,15 @@ Windows :
   Borland C :
   > bcc32c -o hello.exe hello.c tinyfiledialogs.c
   
+  Open Watcom v2
+  > owcc -o hello.exe hello.c tinyfiledialogs.c
+
   Windows Intel C :
   > icx-cc -o hello.exe hello.c tinyfiledialogs.c -lcomdlg32 -lole32 -luser32 -lshell32
   > icx-cl -o toot.exe toot.c tootlib.c comdlg32.lib ole32.lib user32.lib shell32.lib
 
   VisualStudio command line :
   > cl hello.c tinyfiledialogs.c comdlg32.lib ole32.lib user32.lib shell32.lib /W4
-
-  OpenWatcom v2: create a character-mode executable project.
 
   VisualStudio :
     Create a console application project,
