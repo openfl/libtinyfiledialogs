@@ -703,7 +703,7 @@ static void wipefileW(wchar_t const * aFilename)
 {
 		int i;
 		FILE * lIn;
-#if (defined(__MINGW32_MAJOR_VERSION) && !defined(__MINGW64__) && (__MINGW32_MAJOR_VERSION <= 3)) || defined(__BORLANDC__)
+#if (defined(__MINGW32_MAJOR_VERSION) && !defined(__MINGW64__) && (__MINGW32_MAJOR_VERSION <= 3)) || defined(__BORLANDC__) || defined(__WATCOMC__)
 		struct _stat st;
 		if (_wstat(aFilename, &st) == 0)
 #else
@@ -840,7 +840,7 @@ static void RGB2HexW( unsigned char const aRGB[3], wchar_t aoResultHexRGB[8])
 
 static int dirExists(char const * aDirPath)
 {
-#if (defined(__MINGW32_MAJOR_VERSION) && !defined(__MINGW64__) && (__MINGW32_MAJOR_VERSION <= 3)) || defined(__BORLANDC__)
+#if (defined(__MINGW32_MAJOR_VERSION) && !defined(__MINGW64__) && (__MINGW32_MAJOR_VERSION <= 3)) || defined(__BORLANDC__) || defined(__WATCOMC__)
 	struct _stat lInfo;
 #else
 	struct __stat64 lInfo;
@@ -860,7 +860,7 @@ static int dirExists(char const * aDirPath)
 		if (tinyfd_winUtf8)
 		{
 						lTmpWChar = tinyfd_utf8to16(aDirPath);
-#if (defined(__MINGW32_MAJOR_VERSION) && !defined(__MINGW64__) && (__MINGW32_MAJOR_VERSION <= 3)) || defined(__BORLANDC__)
+#if (defined(__MINGW32_MAJOR_VERSION) && !defined(__MINGW64__) && (__MINGW32_MAJOR_VERSION <= 3)) || defined(__BORLANDC__) || defined(__WATCOMC__)
 			lStatRet = _wstat(lTmpWChar, &lInfo);
 #else
 			lStatRet = _wstat64(lTmpWChar, &lInfo);
@@ -872,7 +872,7 @@ static int dirExists(char const * aDirPath)
 			else
 						return 0;
 		}
-#if (defined(__MINGW32_MAJOR_VERSION) && !defined(__MINGW64__) && (__MINGW32_MAJOR_VERSION <= 3)) || defined(__BORLANDC__)
+#if (defined(__MINGW32_MAJOR_VERSION) && !defined(__MINGW64__) && (__MINGW32_MAJOR_VERSION <= 3)) || defined(__BORLANDC__) || defined(__WATCOMC__)
 		else if (_stat(aDirPath, &lInfo) != 0)
 #else
 		else if (_stat64(aDirPath, &lInfo) != 0)
@@ -887,7 +887,7 @@ static int dirExists(char const * aDirPath)
 
 static int fileExists(char const * aFilePathAndName)
 {
-#if (defined(__MINGW32_MAJOR_VERSION) && !defined(__MINGW64__) && (__MINGW32_MAJOR_VERSION <= 3)) || defined(__BORLANDC__)
+#if (defined(__MINGW32_MAJOR_VERSION) && !defined(__MINGW64__) && (__MINGW32_MAJOR_VERSION <= 3)) || defined(__BORLANDC__) || defined(__WATCOMC__)
 	struct _stat lInfo;
 #else
 	struct __stat64 lInfo;
@@ -904,7 +904,7 @@ static int fileExists(char const * aFilePathAndName)
 		if (tinyfd_winUtf8)
 		{
 						lTmpWChar = tinyfd_utf8to16(aFilePathAndName);
-#if (defined(__MINGW32_MAJOR_VERSION) && !defined(__MINGW64__) && (__MINGW32_MAJOR_VERSION <= 3)) || defined(__BORLANDC__)
+#if (defined(__MINGW32_MAJOR_VERSION) && !defined(__MINGW64__) && (__MINGW32_MAJOR_VERSION <= 3)) || defined(__BORLANDC__) || defined(__WATCOMC__)
 			lStatRet = _wstat(lTmpWChar, &lInfo);
 #else
 			lStatRet = _wstat64(lTmpWChar, &lInfo);
