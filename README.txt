@@ -140,7 +140,7 @@ char const * tinyfd_colorChooser(
 | |_______________________________________________________________________________| |
 |___________________________________________________________________________________|
 
-- This is not for ios nor android (it works in termux though).
+- This is not for ios nor android (it works in termux and iSH though).
 - The files can be renamed with extension ".cpp" as the code is 100% compatible C C++
   (just comment out << extern "C" >> in the header file)
 - Windows is fully supported from XP to 10 (maybe even older versions)
