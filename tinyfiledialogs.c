@@ -58,15 +58,20 @@ misrepresented as being the original software.
 #ifndef _GNU_SOURCE
  #define _GNU_SOURCE /* used only to resolve symbolic links. Can be commented out */
  #ifndef _POSIX_C_SOURCE
-  #define _POSIX_C_SOURCE 200112L /* freebsd needs this for realpath() */
+  #ifdef __FreeBSD__
+    #define _POSIX_C_SOURCE 199506L /* 199506L is enough for freebsd for realpath() */
+  #else
+    #define _POSIX_C_SOURCE 200112L /* solaris needs 200112L for realpath() */
+  #endif
  #endif
 #endif
 #endif
 
+/* to accept POSIX 2 in old ANSI C standards */
 #ifndef __sun
-#ifndef _POSIX_C_SOURCE
- #define _POSIX_C_SOURCE 2 /* to accept POSIX 2 in old ANSI C standards */
-#endif
+ #ifndef _POSIX_C_SOURCE
+  #define _POSIX_C_SOURCE 2 
+ #endif
 #endif
 
 #include <stdio.h>
