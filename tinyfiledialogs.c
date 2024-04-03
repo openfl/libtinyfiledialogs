@@ -58,7 +58,7 @@ misrepresented as being the original software.
 #ifndef _GNU_SOURCE
  #define _GNU_SOURCE /* used only to resolve symbolic links. Can be commented out */
  #ifndef _POSIX_C_SOURCE
-  #define _POSIX_C_SOURCE 199506L /* freebsd needs this for realpath() */
+  #define _POSIX_C_SOURCE 200112L /* freebsd needs this for realpath() */
  #endif
 #endif
 #endif
