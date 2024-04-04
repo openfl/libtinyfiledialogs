@@ -142,8 +142,7 @@ char const * tinyfd_colorChooser(
 
 - This is not for ios nor android (it works in termux and iSH though).
 - The files can be renamed with extension ".cpp" as the code is 100% compatible C C++
-  (just comment out << extern "C" >> in the header file)
-- Windows is fully supported from XP to 10 (maybe even older versions)
+- Windows is fully supported from XP to 11 (maybe even older versions)
 - C# & LUA via dll, see files in the folder EXTRAS
 - OSX supported from 10.4 to latest (maybe even older versions)
 - Do not use " and ' as the dialogs will be display with a warning
@@ -153,10 +152,10 @@ char const * tinyfd_colorChooser(
   the list of patterns will become the description.
 - On windows link against Comdlg32.lib and Ole32.lib
   (on windows the no linking claim is a lie)
-- On unix: it tries command line calls, so no such need (NO LINKING).
-- On unix you need one of the following:
+- On unix / macos: it only tries command line calls, so no linking is need.
+- On unix /macos you need one of the following:
   applescript, kdialog, zenity, matedialog, shellementary, qarma, yad,
-  python (2 or 3)/tkinter/python-dbus (optional), Xdialog
+  python (2 or 3)with tkinter/python-dbus, Xdialog
   or curses dialogs (opens terminal if running without console).
 - One of those is already included on most (if not all) desktops.
 - In the absence of those it will use gdialog, gxmessage or whiptail
