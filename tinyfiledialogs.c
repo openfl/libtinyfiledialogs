@@ -1787,6 +1787,7 @@ wchar_t * tinyfd_openFileDialogW(
 BOOL CALLBACK BrowseCallbackProcW_enum(HWND hWndChild, LPARAM lParam)
 {
 	wchar_t buf[255];
+	(void)lParam;
 	GetClassNameW(hWndChild, buf, sizeof(buf));
 	if (wcscmp(buf, L"SysTreeView32") == 0)
 	{
@@ -1800,6 +1801,7 @@ BOOL CALLBACK BrowseCallbackProcW_enum(HWND hWndChild, LPARAM lParam)
 
 static int __stdcall BrowseCallbackProcW(HWND hwnd, UINT uMsg, LPARAM lp, LPARAM pData)
 {
+	(void)lp;
 	switch (uMsg)
 	{
 		case BFFM_INITIALIZED:
@@ -2333,6 +2335,7 @@ static int messageBoxWinConsole(
 		char lDialogFile[MAX_PATH_OR_CMD];
 		FILE * lIn;
 		char lBuff[MAX_PATH_OR_CMD] = "";
+		(void)aIconType;
 
 				strcpy(lDialogString, "dialog ");
 				if (aTitle && strlen(aTitle))
