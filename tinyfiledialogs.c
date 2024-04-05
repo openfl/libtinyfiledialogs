@@ -1186,7 +1186,7 @@ int tinyfd_notifyPopupW(
 		lDialogString = (wchar_t *) malloc(2 * lDialogStringLen);
 		if (!lDialogString) return 0;
 
-		wcscpy(lDialogString, L"powershell.exe -command \"\
+		wcscpy(lDialogString, L"powershell.exe -executionpolicy bypass -command \"\
 function Show-BalloonTip {\
 [cmdletbinding()] \
 param( \
