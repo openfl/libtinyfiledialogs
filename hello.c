@@ -125,7 +125,7 @@ int main( int argc , char * argv[] )
 	strcat(lBuffer, tinyfd_response);
 	tinyfd_messageBox("hello", lBuffer, "ok", "info", 0);
 
-	tinyfd_notifyPopup("the title", "the message\n\tfrom outer-space", "info");
+	/* tinyfd_notifyPopup("the title", "the message\n\tfrom outer-space", "info"); */
 
 	if ( lWillBeGraphicMode && ! tinyfd_forceConsole )
 	{

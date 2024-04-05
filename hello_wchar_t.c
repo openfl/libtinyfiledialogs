@@ -96,7 +96,7 @@ int main(void) /* WINDOWS ONLY */
 
 	tinyfd_messageBoxW(L"hello", lBuffer, L"ok", L"info", 0);
 
-	tinyfd_notifyPopupW(L"the title", L"the message\n\tfrom outer-space", L"info");
+	/* tinyfd_notifyPopupW(L"the title", L"the message\n\tfrom outer-space", L"info"); */
 
 	lPassword = tinyfd_inputBoxW(
 		L"a password box", L"your password will be revealed later", NULL);
