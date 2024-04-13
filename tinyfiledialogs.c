@@ -1295,8 +1295,10 @@ ResizeTo intWidth, intHeight\n\
 MoveTo Screen.Width * .7, Screen.Height * .8\n\
 result = 0\n\
 Sub Window_onLoad\n\
-idTimer = window.setTimeout(\"PausedSection\", 3500, \"VBScript\")\n\
-End Sub\n\
+idTimer = window.setTimeout(\"PausedSection\", 3000, \"VBScript\")\n\
+End Sub\n");
+
+	wcscat(lDialogString, L"\n\
 Sub PausedSection\n\
 window.Close\n\
 End Sub\n\
