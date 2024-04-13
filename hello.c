@@ -7,7 +7,7 @@ Copyright (c) 2014 - 2024 Guillaume Vareille http://ysengrin.com
 
 ********* TINY FILE DIALOGS OFFICIAL WEBSITE IS ON SOURCEFORGE *********
   _________
- /         \ hello.c v3.17.5 [Mar 28, 2024]
+ /         \ hello.c v3.18 [apr 13, 2024]
  |tiny file| Hello World file created [November 9, 2014]
  | dialogs |
  \____  ___/ http://tinyfiledialogs.sourceforge.net
@@ -125,21 +125,23 @@ int main( int argc , char * argv[] )
 	strcat(lBuffer, tinyfd_response);
 	tinyfd_messageBox("hello", lBuffer, "ok", "info", 0);
 
-	/* tinyfd_notifyPopup("the title", "the message\n\tfrom outer-space", "info"); */
+	tinyfd_notifyPopup("the title", "the message\n\tfrom outer-space", "info");
 
 	if ( lWillBeGraphicMode && ! tinyfd_forceConsole )
 	{
 #if 0
-			lIntValue = tinyfd_messageBox("Hello World", "\
+		lIntValue = tinyfd_messageBox("Hello World", "\
 graphic dialogs [Yes]\n\
 console mode [No]\n\
 quit [Cancel]",
-				"yesnocancel", "question", 1);
-			if (!lIntValue) return 1;
-			tinyfd_forceConsole = (lIntValue == 2);
+			"yesnocancel", "question", 1);
+		if (!lIntValue) return 1;
+		tinyfd_forceConsole = (lIntValue == 2);
 #else
-			lIntValue = tinyfd_messageBox("Hello World", "graphic dialogs [Yes] / console mode [No]", "yesno", "question", 1);
-			tinyfd_forceConsole = ! lIntValue;
+		lIntValue = tinyfd_messageBox(
+			"Hello World", "graphic dialogs [Yes] / console mode [No]",
+			"yesno", "question", 1);
+		tinyfd_forceConsole = ! lIntValue;
 #endif
 	}
 

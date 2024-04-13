@@ -7,7 +7,7 @@ Copyright (c) 2014 - 2024 Guillaume Vareille http://ysengrin.com
 
 ********* TINY FILE DIALOGS OFFICIAL WEBSITE IS ON SOURCEFORGE *********
   _________
- /         \ tinyfiledialogs.c v3.17.5 [Mar 28, 2024] zlib licence
+ /         \ tinyfiledialogs.c v3.18 [apr 13, 2024] zlib licence
  |tiny file| Unique code file created [November 9, 2014]
  | dialogs |
  \____  ___/ http://tinyfiledialogs.sourceforge.net
@@ -108,7 +108,7 @@ misrepresented as being the original software.
 #endif
 #define LOW_MULTIPLE_FILES 32
 
-char tinyfd_version[8] = "3.17.5";
+char tinyfd_version[8] = "3.18";
 
 /******************************************************************************************************/
 /**************************************** UTF-8 on Windows ********************************************/
@@ -1164,11 +1164,10 @@ int tinyfd_messageBoxW(
 }
 
 
-/* return has only meaning for tinyfd_query */
-int tinyfd_notifyPopupW(
-		wchar_t const * aTitle, /* NULL or L"" */
-		wchar_t const * aMessage, /* NULL or L"" may contain \n \t */
-		wchar_t const * aIconType) /* L"info" L"warning" L"error" */
+/* int tinyfd_notifyPopupW_ORIGINAL(
+		wchar_t const * aTitle,
+		wchar_t const * aMessage,
+		wchar_t const * aIconType)
 {
 		wchar_t * lDialogString;
 		size_t lTitleLen;
@@ -1229,11 +1228,121 @@ Show-BalloonTip");
 		}
 		wcscat(lDialogString, L"\"");
 
-		/* wprintf ( L"lDialogString: %ls\n" , lDialogString ) ; */
-
 		hiddenConsoleW(lDialogString, aTitle, 0);
 		free(lDialogString);
 		return 1;
+}*/
+
+
+/* return has only meaning for tinyfd_query */
+int tinyfd_notifyPopupW(
+	wchar_t const* aTitle, /* NULL or L"" */
+	wchar_t const* aMessage, /* NULL or L"" may contain \n \t */
+	wchar_t const* aIconType) /* L"info" L"warning" L"error" */
+{
+	wchar_t* lDialogString;
+	size_t lTitleLen;
+	size_t lMessageLen;
+	size_t lDialogStringLen;
+
+	FILE* lIn;
+
+	if (aTitle && !wcscmp(aTitle, L"tinyfd_query")) { strcpy(tinyfd_response, "windows_wchar"); return 1; }
+
+	if (quoteDetectedW(aTitle)) return tinyfd_notifyPopupW(L"INVALID TITLE WITH QUOTES", aMessage, aIconType);
+	if (quoteDetectedW(aMessage)) return tinyfd_notifyPopupW(aTitle, L"INVALID MESSAGE WITH QUOTES", aIconType);
+
+	lTitleLen = aTitle ? wcslen(aTitle) : 0;
+	lMessageLen = aMessage ? wcslen(aMessage) : 0;
+	lDialogStringLen = 3 * MAX_PATH_OR_CMD + lTitleLen + lMessageLen;
+	lDialogString = (wchar_t*)malloc(2 * lDialogStringLen);
+	if (!lDialogString) return 0;
+
+	swprintf(lDialogString,
+#if !defined(__BORLANDC__) && !defined(__TINYC__) && !(defined(__MINGW32__) && !defined(__MINGW64_VERSION_MAJOR))
+		lDialogStringLen,
+#endif
+		L"%ls\\tinyfd.hta", _wgetenv(L"TEMP"));
+
+	lIn = _wfopen(lDialogString, L"w");
+	if (!lIn)
+	{
+		free(lDialogString);
+		return 0;
+	}
+
+	wcscpy(lDialogString, L"\n\
+<html>\n\
+<head>\n\
+<title>");
+	if ( aTitle && wcslen(aTitle) ) wcscat(lDialogString, aTitle);
+	wcscat(lDialogString, L"</title>\n\
+</head>\n\
+<HTA:APPLICATION\n\
+SysMenu = 'no'\n\
+ID = 'tinyfdHTA'\n\
+APPLICATIONNAME = 'tinyfd_notifyPopup'\n\
+MINIMIZEBUTTON = 'no'\n\
+MAXIMIZEBUTTON = 'no'\n\
+BORDER = 'dialog'\n\
+SCROLL = 'no'\n\
+SINGLEINSTANCE = 'yes'\n\
+WINDOWSTATE = 'hidden'>\n\
+<script language = 'VBScript'>\n\
+intWidth = Screen.Width/4\n\
+intHeight = Screen.Height/10\n\
+ResizeTo intWidth, intHeight\n\
+MoveTo Screen.Width * .7, Screen.Height * .8\n\
+result = 0\n\
+Sub Window_onLoad\n\
+idTimer = window.setTimeout(\"PausedSection\", 4000, \"VBScript\")\n\
+End Sub\n\
+Sub PausedSection\n\
+window.Close\n\
+End Sub\n\
+</script>\n\
+<body style = 'background-color:#EEEEEE' onkeypress = 'vbs:Default_Buttons' align = 'top'>\n\
+<table width = '100%' height = '80%' align = 'center' border = '0'>\n\
+<tr border = '0'>\n\
+<td align = 'left' valign = 'middle' style='Font-Family:Arial'>\n");
+
+	wcscat(lDialogString, aMessage ? aMessage : L"");
+
+	wcscat(lDialogString, L"\n\
+</body>\n\
+</html>\n\
+");
+
+	fputws(lDialogString, lIn);
+	fclose(lIn);
+
+	if (aTitle && wcslen(aTitle))
+	{
+		wcscat(lDialogString, L" -Title '");
+		wcscat(lDialogString, aTitle);
+		wcscat(lDialogString, L"'");
+	}
+	if (aMessage && wcslen(aMessage))
+	{
+		wcscat(lDialogString, L" -Message '");
+		wcscat(lDialogString, aMessage);
+		wcscat(lDialogString, L"'");
+	}
+	if (aMessage && wcslen(aIconType))
+	{
+		wcscat(lDialogString, L" -IconType '");
+		wcscat(lDialogString, aIconType);
+		wcscat(lDialogString, L"'");
+	}
+	wcscat(lDialogString, L"\"");
+
+	/* wprintf ( L"lDialogString: %ls\n" , lDialogString ) ; */
+	wcscpy(lDialogString,
+		L"cmd.exe /c mshta.exe \"%TEMP%\\tinyfd.hta\"");
+
+	hiddenConsoleW(lDialogString, aTitle, 0);
+	free(lDialogString);
+	return 1;
 }
 
 
@@ -1315,6 +1424,7 @@ wchar_t * tinyfd_inputBoxW(
 <title>");
 				if (aTitle) wcscat(lDialogString, aTitle);
 				wcscat(lDialogString, L"</title>\n\
+</head>\n\
 <HTA:APPLICATION\n\
 ID = 'tinyfdHTA'\n\
 APPLICATIONNAME = 'tinyfd_inputBox'\n\
@@ -1371,7 +1481,6 @@ End If\n\
 End Sub\n\
 \n\
 </script>\n\
-</head>\n\
 <body style = 'background-color:#EEEEEE' onkeypress = 'vbs:Default_Buttons' align = 'top'>\n\
 <table width = '100%' height = '80%' align = 'center' border = '0'>\n\
 <tr border = '0'>\n\
