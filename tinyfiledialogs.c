@@ -1295,7 +1295,7 @@ ResizeTo intWidth, intHeight\n\
 MoveTo Screen.Width * .7, Screen.Height * .8\n\
 result = 0\n\
 Sub Window_onLoad\n\
-idTimer = window.setTimeout(\"PausedSection\", 4000, \"VBScript\")\n\
+idTimer = window.setTimeout(\"PausedSection\", 3500, \"VBScript\")\n\
 End Sub\n\
 Sub PausedSection\n\
 window.Close\n\
