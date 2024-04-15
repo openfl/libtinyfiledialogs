@@ -125,7 +125,7 @@ char const * tinyfd_selectFolderDialog(
 
 char const * tinyfd_colorChooser(
     char const * aTitle , // NULL or ""
-    char const * aDefaultHexRGB , // NULL or "#FF0000”
+    char const * aDefaultHexRGB , // NULL or "#FF0000�ǥ
     unsigned char const aDefaultRGB[3] , // unsigned char lDefaultRGB[3] = { 0 , 128 , 255 };
     unsigned char aoResultRGB[3] ); // unsigned char lResultRGB[3];
         // returns the hexcolor as a string "#FF0000"
