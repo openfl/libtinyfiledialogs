@@ -7,7 +7,7 @@ Copyright (c) 2014 - 2024 Guillaume Vareille http://ysengrin.com
 
 ********* TINY FILE DIALOGS OFFICIAL WEBSITE IS ON SOURCEFORGE *********
   _________
- /         \ tinyfiledialogs.c v3.18 [apr 13, 2024] zlib licence
+ /         \ tinyfiledialogs.c v3.18.1 [apr 18, 2024] zlib licence
  |tiny file| Unique code file created [November 9, 2014]
  | dialogs |
  \____  ___/ http://tinyfiledialogs.sourceforge.net
@@ -88,7 +88,7 @@ misrepresented as being the original software.
  #include <conio.h>
  #include <direct.h>
  #define TINYFD_NOCCSUNICODE
- #define SLASH "\\"
+ #define TINYFD_SLASH "\\"
 #else
  #include <limits.h>
  #include <unistd.h>
@@ -96,7 +96,7 @@ misrepresented as being the original software.
  #include <termios.h>
  #include <sys/utsname.h>
  #include <signal.h> /* on old systems try <sys/signal.h> instead */
- #define SLASH "/"
+ #define TINYFD_SLASH "/"
 #endif /* _WIN32 */
 
 #include "tinyfiledialogs.h"
@@ -108,7 +108,7 @@ misrepresented as being the original software.
 #endif
 #define LOW_MULTIPLE_FILES 32
 
-char tinyfd_version[8] = "3.18";
+char tinyfd_version[8] = "3.18.1";
 
 /******************************************************************************************************/
 /**************************************** UTF-8 on Windows ********************************************/
@@ -270,9 +270,9 @@ static void ensureFinalSlash( char * aioString )
 		if ( aioString && strlen( aioString ) )
 		{
 				char * lastcar = aioString + strlen( aioString ) - 1 ;
-				if ( strncmp( lastcar , SLASH , 1 ) )
+				if ( strncmp( lastcar , TINYFD_SLASH , 1 ) )
 				{
-						strcat( lastcar , SLASH ) ;
+						strcat( lastcar , TINYFD_SLASH ) ;
 				}
 		}
 }
@@ -1994,7 +1994,7 @@ wchar_t * tinyfd_colorChooserW(
 
 		lHResult = CoInitializeEx(NULL, 0);
 
-		if ( aDefaultHexRGB )
+		if ( aDefaultHexRGB && wcslen(aDefaultHexRGB) )
 		{
 				Hex2RGBW(aDefaultHexRGB, lDefaultRGB);
 		}
@@ -2364,9 +2364,9 @@ static char * colorChooserWinGui(
 		static char lResultHexRGB[8];
 
 		wchar_t lTitle[128];
-		wchar_t lDefaultHexRGB[16];
 		wchar_t * lTmpWChar;
 		char * lTmpChar;
+		wchar_t lDefaultHexRGB[16] = L"";
 
 				if (aTitle)
 				{
