@@ -168,15 +168,17 @@
 
 ! This works on VisualStudio with Intel Fortran (make sure the C project has very similar settings as your fortran project):
       ________________________________________________________________________
-! 0) | Install The Windows SDK                                                |
+! 1) | Install The Windows SDK                                                |
 !    |     http://developer.microsoft.com/en-us/windows/downloads/windows-sdk |
 !    |________________________________________________________________________|
-! 1) Create a new empty C/C++ project, verify the configuration is for X64.
-! 2) Add existing files: tinyfiledialogs.c and tinyfiledialogs.h
-! 3) Build this project. It will fail because there is no main(), but it will create tinyfiledialogs.obj
-! 4) Create a new empty Fortran project, verify the configuration is for X64.
-! 5) Add existing file: tinyfiledialogs.obj - the one that was created on 3)
+! 2) Create a new empty C/C++ project, verify the configuration is for X64.
+! 3) Add existing files: tinyfiledialogs.c and tinyfiledialogs.h
+! 4) Build this project. It will fail because there is no main(),
+!         but it will create tinyfiledialogs.obj
+! 5) Create a new empty Fortran project, verify the configuration is for X64.
+! 6) Add existing file: tinyfiledialogs.obj - the one that was created on 4)
 ! 7) Add existing files: tinyfd_module.f90 and tinyfd_main.f90
-! 6) In the properties of this fortran project, in the linker input field, add:
-!              comdlg32.lib ole32.lib user32.lib shell32.lib
-! 7) Build and Run. Voila !
+! 8) In the properties of this fortran project, in the linker input field,
+!              add: comdlg32.lib ole32.lib user32.lib shell32.lib
+!              or maybe add: %(AdditionalDependencies)
+! 9) Build and Run. Voila !
