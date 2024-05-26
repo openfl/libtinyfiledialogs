@@ -179,7 +179,6 @@ char const * tinyfd_colorChooser(
   It can be found at the bottom of the following page:
   http://andrear.altervista.org/home/cdialog.php
   _________________________________________________________________
- |                                                                 |
  | The project provides an Hello World example:                    |
  |   if a console is missing, it will use graphic dialogs          |
  |   if a graphical display is absent, it will use console dialogs |
@@ -195,13 +194,13 @@ $ clang -o hello hello.c tinyfiledialogs.c
   -g3 -Wall -Wextra -Wdouble-promotion -Wconversion -Wno-sign-conversion
   -Wno-unused-parameter -Wno-unused-function -fsanitize=undefined -fsanitize=thread
   -Wno-deprecated -Wno-incompatible-compiler )
-( musl instead of glibc: clang -fuse-ld=lld --rtlib=compiler-rt )
+( if using musl instead of glibc: clang -fuse-ld=lld --rtlib=compiler-rt )
 
- ______________________________________________________________________________
-| Windows :                                                                    |
-|  You will need to install The Windows SDK (Software Development Kit) |
-|       https://developer.microsoft.com/en-us/windows/downloads/windows-sdk/   |
-|______________________________________________________________________________|
+ _____________________________________________________________________________
+| Windows :                                                                   |
+|  You'll probably need to install The Windows SDK (Software Development Kit) |
+|       http://developer.microsoft.com/en-us/windows/downloads/windows-sdk    |
+|_____________________________________________________________________________|
 
   MinGW needs gcc >= v4.9 otherwise some headers are incomplete
   > gcc -o hello.exe hello.c tinyfiledialogs.c -LC:/mingw/lib -lcomdlg32 -lole32
