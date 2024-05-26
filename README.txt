@@ -197,8 +197,11 @@ $ clang -o hello hello.c tinyfiledialogs.c
   -Wno-deprecated -Wno-incompatible-compiler )
 ( musl instead of glibc: clang -fuse-ld=lld --rtlib=compiler-rt )
 
-Windows :
-  You may need to install Install The Windows SDK (Software Development Kit)      https://developer.microsoft.com/en-us/windows/downloads/windows-sdk/
+ ______________________________________________________________________________
+| Windows :                                                                    |
+|  You will need to install Install The Windows SDK (Software Development Kit) |
+|       https://developer.microsoft.com/en-us/windows/downloads/windows-sdk/   |
+|______________________________________________________________________________|
 
   MinGW needs gcc >= v4.9 otherwise some headers are incomplete
   > gcc -o hello.exe hello.c tinyfiledialogs.c -LC:/mingw/lib -lcomdlg32 -lole32
