@@ -199,7 +199,7 @@ $ clang -o hello hello.c tinyfiledialogs.c
 
  ______________________________________________________________________________
 | Windows :                                                                    |
-|  You will need to install Install The Windows SDK (Software Development Kit) |
+|  You will need to install The Windows SDK (Software Development Kit) |
 |       https://developer.microsoft.com/en-us/windows/downloads/windows-sdk/   |
 |______________________________________________________________________________|
 
