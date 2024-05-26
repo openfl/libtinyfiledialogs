@@ -1,7 +1,7 @@
 ! SPDX-License-Identifier: ZLIB
 ! Copyright (c) 2014 - 2023 Guillaume Vareille http://ysengrin.com
 !  _________
-! /         \ tinyfiledialogs v3.10 [Mar 27, 2023]
+! /         \ tinyfiledialogs v3.18.1 [May 26, 2024]
 ! |tiny file|
 ! | dialogs |
 ! \____  ___/ http://tinyfiledialogs.sourceforge.net
@@ -167,6 +167,8 @@
 ! or in one line :  gfortran -o tinyfd_exe tinyfd_module.f90 ../../tinyfiledialogs.c tinyfd_main.f90
 
 ! This works on VisualStudio with Intel Fortran (make sure the C project has very similar settings as your fortran project):
+! 0) Install The Windows SDK
+!            https://developer.microsoft.com/en-us/windows/downloads/windows-sdk/
 ! 1) Create a new empty C/C++ project, verify the configuration is for X64.
 ! 2) Add existing files: tinyfiledialogs.c and tinyfiledialogs.h
 ! 3) Build this project. It will fail because there is no main(), but it will create tinyfiledialogs.obj

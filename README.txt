@@ -11,7 +11,7 @@ Copyright (c) 2014 - 2024 Guillaume Vareille http://ysengrin.com
   | 100% compatible C C++  ->  You can rename tinfiledialogs.c as .cpp |
   |____________________________________________________________________|
 
-tiny file dialogs ( cross-platform C C++ ) v3.18.1 [May 2, 2024]
+tiny file dialogs ( cross-platform C C++ ) v3.18.1 [May 26, 2024]
  _________
 /         \   Tray-popup InputBox PasswordBox MessageBox Notification Beep
 |tiny file|   ColorPicker OpenFileDialog SaveFileDialog SelectFolderDialog
@@ -198,6 +198,8 @@ $ clang -o hello hello.c tinyfiledialogs.c
 ( musl instead of glibc: clang -fuse-ld=lld --rtlib=compiler-rt )
 
 Windows :
+  You may need to install Install The Windows SDK (Software Development Kit)      https://developer.microsoft.com/en-us/windows/downloads/windows-sdk/
+
   MinGW needs gcc >= v4.9 otherwise some headers are incomplete
   > gcc -o hello.exe hello.c tinyfiledialogs.c -LC:/mingw/lib -lcomdlg32 -lole32
 

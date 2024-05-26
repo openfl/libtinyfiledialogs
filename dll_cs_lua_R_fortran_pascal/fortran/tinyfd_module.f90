@@ -1,7 +1,7 @@
 ! SPDX-License-Identifier: ZLIB
 ! Copyright (c) 2014 - 2023 Guillaume Vareille http://ysengrin.com
 !  _________
-! /         \ tinyfiledialogs v3.10 [Mar 27, 2023]
+! /         \ tinyfiledialogs v3.18.1 [Mar 26, 2024]
 ! |tiny file|
 ! | dialogs |
 ! \____  ___/ http://tinyfiledialogs.sourceforge.net
@@ -28,6 +28,7 @@
 !        |            https://stackoverflow.com/a/59657117           |
 !        |___________________________________________________________|
 
+! See compilation instructions at the end of tinyfd_main.f90
 
 	module tinyfd
 		interface ! C interface
