@@ -167,8 +167,10 @@
 ! or in one line :  gfortran -o tinyfd_exe tinyfd_module.f90 ../../tinyfiledialogs.c tinyfd_main.f90
 
 ! This works on VisualStudio with Intel Fortran (make sure the C project has very similar settings as your fortran project):
-! 0) Install The Windows SDK
-!            https://developer.microsoft.com/en-us/windows/downloads/windows-sdk/
+      ________________________________________________________________________
+! 0) | Install The Windows SDK                                                |
+!    |     http://developer.microsoft.com/en-us/windows/downloads/windows-sdk |
+!    |________________________________________________________________________|
 ! 1) Create a new empty C/C++ project, verify the configuration is for X64.
 ! 2) Add existing files: tinyfiledialogs.c and tinyfiledialogs.h
 ! 3) Build this project. It will fail because there is no main(), but it will create tinyfiledialogs.obj
