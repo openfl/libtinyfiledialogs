@@ -223,6 +223,7 @@ $ clang -o hello hello.c tinyfiledialogs.c
   VisualStudio command line :
   > cl hello.c tinyfiledialogs.c comdlg32.lib ole32.lib user32.lib shell32.lib /W4
 
-  VisualStudio :
-    Create a console application project,
-    it links against comdlg32.lib & ole32.lib.
+  VisualStudio 
+	In the properties of your project, in the linker input field,
+	      you may need to add: comdlg32.lib ole32.lib user32.lib shell32.lib
+	         or maybe simply add: %(AdditionalDependencies)
