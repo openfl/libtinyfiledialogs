@@ -200,6 +200,7 @@ $ clang -o hello hello.c tinyfiledialogs.c
 | Windows :                                                                   |
 |  You'll probably need to install The Windows SDK (Software Development Kit) |
 |       http://developer.microsoft.com/en-us/windows/downloads/windows-sdk    |
+|                                 (the user doesn't need to install anything) |
 |_____________________________________________________________________________|
 
   MinGW needs gcc >= v4.9 otherwise some headers are incomplete
