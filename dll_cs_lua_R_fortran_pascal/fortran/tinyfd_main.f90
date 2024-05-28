@@ -170,6 +170,7 @@
       ________________________________________________________________________
 ! 1) | Install The Windows SDK                                                |
 !    |     http://developer.microsoft.com/en-us/windows/downloads/windows-sdk |
+!    |                            (the user doesn't need to install anything) |
 !    |________________________________________________________________________|
 ! 2) Create a new empty C/C++ project, verify the configuration is for X64.
 ! 3) Add existing files: tinyfiledialogs.c and tinyfiledialogs.h
