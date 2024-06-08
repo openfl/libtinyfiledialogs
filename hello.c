@@ -145,6 +145,12 @@ quit [Cancel]",
 #endif
 	}
 
+
+	lIntValue = tinyfd_messageBox(
+		"Hello World", "graphic dialogs [Yes] / console mode [No]",
+		"yesno", "question", 1);
+
+
 	lPassword = tinyfd_inputBox(
 		"a password box", "your password will be revealed later", NULL);
 

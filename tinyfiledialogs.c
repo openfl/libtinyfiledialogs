@@ -2952,7 +2952,7 @@ int tinyfd_messageBox(
 								else printf("%s", aMessage);
 								printf("\n\n");
 						}
-						printf("press enter to continue ");
+						printf("press enter to continue "); fflush(stdout);
 						lChar = (char)_getch();
 						printf("\n\n");
 						if (!tinyfd_winUtf8) { (void)SetConsoleCP(lOriginalCP); (void)SetConsoleOutputCP(lOriginalOutputCP); }
@@ -3062,7 +3062,7 @@ char * tinyfd_inputBox(
 				else printf("%s", aMessage);
 				printf("\n");
 	  }
-	  printf("(ctrl-Z + enter to cancel): ");
+	  printf("(ctrl-Z + enter to cancel): "); fflush(stdout);
 	  if ( ! aDefaultInput )
 	  {
 				  (void) GetConsoleMode(hStdin, &mode);
