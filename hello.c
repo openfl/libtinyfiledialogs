@@ -81,12 +81,12 @@ misrepresented as being the original software.
 int main( int argc , char * argv[] )
 {
 	int lIntValue;
-	char const * lPassword;
-	char const * lTheSaveFileName;
-	char const * lTheOpenFileName;
-	char const * lTheSelectFolderName;
-	char const * lTheHexColor;
-	char const * lWillBeGraphicMode;
+	char * lPassword;
+	char * lTheSaveFileName;
+	char * lTheOpenFileName;
+	char * lTheSelectFolderName;
+	char * lTheHexColor;
+	char * lWillBeGraphicMode;
 	unsigned char lRgbColor[3];
 	FILE * lIn;
 	char lBuffer[1024];

@@ -61,12 +61,12 @@ misrepresented as being the original software.
 
 int main(void) /* WINDOWS ONLY */
 {
-	wchar_t const * lPassword;
-	wchar_t const * lTheSaveFileName;
-	wchar_t const * lTheOpenFileName;
-	wchar_t const * lTheSelectFolderName;
-	wchar_t const * lTheHexColor;
-	wchar_t const * lWillBeGraphicMode;
+	wchar_t * lPassword;
+	wchar_t * lTheSaveFileName;
+	wchar_t * lTheOpenFileName;
+	wchar_t * lTheSelectFolderName;
+	wchar_t * lTheHexColor;
+	wchar_t * lWillBeGraphicMode;
 	unsigned char lRgbColor[3];
 	FILE * lIn;
 	wchar_t lWcharBuff[1024];
