@@ -11,7 +11,7 @@ Copyright (c) 2014 - 2024 Guillaume Vareille http://ysengrin.com
   | 100% compatible C C++  ->  You can rename tinfiledialogs.c as .cpp |
   |____________________________________________________________________|
 
-tiny file dialogs ( cross-platform C C++ ) v3.18.2 [Jun 8, 2024]
+tiny file dialogs ( cross-platform C C++ ) v3.18.2 [Jun 16, 2024]
  _________
 /         \   Tray-popup InputBox PasswordBox MessageBox Notification Beep
 |tiny file|   ColorPicker OpenFileDialog SaveFileDialog SelectFolderDialog
@@ -219,7 +219,9 @@ $ clang -o hello hello.c tinyfiledialogs.c
 
   Windows Intel C :
   > icx-cc -o hello.exe hello.c tinyfiledialogs.c -lcomdlg32 -lole32 -luser32 -lshell32
-  > icx-cl -o toot.exe toot.c tootlib.c comdlg32.lib ole32.lib user32.lib shell32.lib
+  > icx-cl -o hello.exe hello.c tinyfiledialogs.c comdlg32.lib ole32.lib user32.lib shell32.lib
+  > icx -o hello.exe hello.c tinyfiledialogs.c comdlg32.lib ole32.lib user32.lib shell32.lib
+  > icpx -o hello.exe hello.c tinyfiledialogs.c -lcomdlg32 -lole32 -luser32 -lshell32 -Wno-deprecated
 
   VisualStudio command line :
   > cl hello.c tinyfiledialogs.c comdlg32.lib ole32.lib user32.lib shell32.lib /W4
