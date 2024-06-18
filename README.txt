@@ -211,7 +211,7 @@ $ clang -o hello hello.c tinyfiledialogs.c
       -isystem C:\tcc\winapi-full-for-0.9.27\include\winapi ^
       -lcomdlg32 -lole32 -luser32 -lshell32
 
-  Borland C :
+  Embarcadero / Borland C :
   > bcc32c -o hello.exe hello.c tinyfiledialogs.c
 
   Open Watcom C v2
