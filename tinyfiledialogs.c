@@ -192,12 +192,6 @@ char tinyfd_needs[] = "\
 #pragma warning(disable:4706) /* allows usage of strncpy, strcpy, strcat, sprintf, fopen */
 #endif
 
-static int getenvDISPLAY(void)
-{
-		return tinyfd_assumeGraphicDisplay || getenv("DISPLAY") || getenv("WAYLAND_DISPLAY") ;
-}
-
-
 static char * getCurDir(void)
 {
 		static char lCurDir[MAX_PATH_OR_CMD];
@@ -485,6 +479,7 @@ int tinyfd_setGlobalInt(char const * aIntVariableName, int aValue) /* to be call
 
 
 #ifdef _WIN32
+
 static int powershellPresent(void)
 { /*only on vista and above (or installed on xp)*/
 	static int lPowershellPresent = -1;
@@ -2842,6 +2837,12 @@ static void writeUtf8( char const * aUtf8String )
 }
 
 
+static int getenvDISPLAY(void)
+{
+		return tinyfd_assumeGraphicDisplay || getenv("DISPLAY") ;
+}
+
+
 int tinyfd_messageBox(
 		char const * aTitle, /* NULL or "" */
 		char const * aMessage, /* NULL or ""  may contain \n and \t */
@@ -3755,6 +3756,7 @@ static int whiptailPresent(void)
 		}
 }
 
+
 static int waypipePresent(void)
 {
 		static int lWaypipePresent = -1 ;
@@ -3766,11 +3768,18 @@ static int waypipePresent(void)
 }
 
 
+static int getenvDISPLAY(void)
+{
+		return tinyfd_assumeGraphicDisplay || getenv("DISPLAY")
+			|| ( getenv("WAYLAND_DISPLAY") && waypipePresent() ) ;
+}
+
+
 static int graphicMode(void)
 {
 		return !( tinyfd_forceConsole && (isTerminalRunning() || terminalName()) )
 						&& ( getenvDISPLAY()
-						|| (tfd_isDarwin() && (!getenv("SSH_TTY") || (getenvDISPLAY() && waypipePresent() ) ) ) ) ;
+						|| (tfd_isDarwin() && (!getenv("SSH_TTY") || getenvDISPLAY() ) ) ) ;
 }
 
 
