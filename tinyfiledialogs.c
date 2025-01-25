@@ -194,11 +194,9 @@ char tinyfd_needs[] = "\
 #endif
 
 
-static int waypipePresent(void);
 static int getenvDISPLAY(void)
 {
-		return tinyfd_assumeGraphicDisplay || getenv("DISPLAY")
-			|| ( getenv("WAYLAND_DISPLAY") && waypipePresent() ) ;
+		return tinyfd_assumeGraphicDisplay || getenv("DISPLAY") || getenv("WAYLAND_DISPLAY") ;
 }
 
 
@@ -2441,41 +2439,6 @@ static int dialogPresent(void)
 }
 
 
-static int waypipePresent(void)
-{
-	static int lWaypipePresent = -1 ;
-	char lBuff[MAX_PATH_OR_CMD] ;
-	FILE * lIn ;
-	char const * lString = "waypipe.exe";
-	if (!tinyfd_allowCursesDialogs) return 0;
-	if (lWaypipePresent < 0)
-	{
-		lIn = _popen("where waypipe.exe", "r");
-		if ( ! lIn )
-		{
-				lWaypipePresent = 0 ;
-				return 0 ;
-		}
-		while ( fgets( lBuff , sizeof( lBuff ) , lIn ) != NULL )
-		{}
-		_pclose( lIn ) ;
-		if ( lBuff[strlen( lBuff ) -1] == '\n' )
-		{
-				lBuff[strlen( lBuff ) -1] = '\0' ;
-		}
-		if ( strcmp(lBuff+strlen(lBuff)-strlen(lString),lString) )
-		{
-				lWaypipePresent = 0 ;
-		}
-		else
-		{
-				lWaypipePresent = 1 ;
-		}
-	}
-	return lWaypipePresent;
-}
-
-
 static int messageBoxWinConsole(
 	char const * aTitle , /* NULL or "" */
 	char const * aMessage , /* NULL or ""  may contain \n and \t */
@@ -3794,17 +3757,6 @@ static int whiptailPresent(void)
 		{
 				return 0 ;
 		}
-}
-
-
-static int waypipePresent(void)
-{
-		static int lWaypipePresent = -1 ;
-		if ( lWaypipePresent < 0 )
-		{
-				lWaypipePresent = detectPresence("waypipe") ;
-		}
-		return lWaypipePresent ;
 }
 
 
