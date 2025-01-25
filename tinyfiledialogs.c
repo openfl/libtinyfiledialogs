@@ -2883,12 +2883,6 @@ static void writeUtf8( char const * aUtf8String )
 }
 
 
-static int getenvDISPLAY(void)
-{
-		return tinyfd_assumeGraphicDisplay || getenv("DISPLAY") ;
-}
-
-
 int tinyfd_messageBox(
 		char const * aTitle, /* NULL or "" */
 		char const * aMessage, /* NULL or ""  may contain \n and \t */
