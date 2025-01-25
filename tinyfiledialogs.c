@@ -186,11 +186,21 @@ char tinyfd_needs[] = "\
 
 #endif
 
+
 #ifdef _MSC_VER
 #pragma warning(disable:4996) /* allows usage of strncpy, strcpy, strcat, sprintf, fopen */
 #pragma warning(disable:4100) /* allows usage of strncpy, strcpy, strcat, sprintf, fopen */
 #pragma warning(disable:4706) /* allows usage of strncpy, strcpy, strcat, sprintf, fopen */
 #endif
+
+
+static int waypipePresent(void);
+static int getenvDISPLAY(void)
+{
+		return tinyfd_assumeGraphicDisplay || getenv("DISPLAY")
+			|| ( getenv("WAYLAND_DISPLAY") && waypipePresent() ) ;
+}
+
 
 static char * getCurDir(void)
 {
@@ -295,6 +305,7 @@ static void Hex2RGB( char const aHexRGB[8] , unsigned char aoResultRGB[3] )
 				}
 		}
 }
+
 
 static void RGB2Hex( unsigned char const aRGB[3], char aoResultHexRGB[8] )
 {
@@ -2397,36 +2408,71 @@ static char * colorChooserWinGui(
 
 static int dialogPresent(void)
 {
-		static int lDialogPresent = -1 ;
-		char lBuff[MAX_PATH_OR_CMD] ;
-		FILE * lIn ;
-		char const * lString = "dialog.exe";
-				if (!tinyfd_allowCursesDialogs) return 0;
-				if (lDialogPresent < 0)
+	static int lDialogPresent = -1 ;
+	char lBuff[MAX_PATH_OR_CMD] ;
+	FILE * lIn ;
+	char const * lString = "dialog.exe";
+	if (!tinyfd_allowCursesDialogs) return 0;
+	if (lDialogPresent < 0)
+	{
+		lIn = _popen("where dialog.exe", "r");
+		if ( ! lIn )
 		{
-				lIn = _popen("where dialog.exe", "r");
-				if ( ! lIn )
-				{
-						lDialogPresent = 0 ;
-						return 0 ;
-				}
-				while ( fgets( lBuff , sizeof( lBuff ) , lIn ) != NULL )
-				{}
-				_pclose( lIn ) ;
-				if ( lBuff[strlen( lBuff ) -1] == '\n' )
-				{
-						lBuff[strlen( lBuff ) -1] = '\0' ;
-				}
-				if ( strcmp(lBuff+strlen(lBuff)-strlen(lString),lString) )
-				{
-						lDialogPresent = 0 ;
-				}
-				else
-				{
-						lDialogPresent = 1 ;
-				}
+				lDialogPresent = 0 ;
+				return 0 ;
 		}
-				return lDialogPresent;
+		while ( fgets( lBuff , sizeof( lBuff ) , lIn ) != NULL )
+		{}
+		_pclose( lIn ) ;
+		if ( lBuff[strlen( lBuff ) -1] == '\n' )
+		{
+				lBuff[strlen( lBuff ) -1] = '\0' ;
+		}
+		if ( strcmp(lBuff+strlen(lBuff)-strlen(lString),lString) )
+		{
+				lDialogPresent = 0 ;
+		}
+		else
+		{
+				lDialogPresent = 1 ;
+		}
+	}
+	return lDialogPresent;
+}
+
+
+static int waypipePresent(void)
+{
+	static int lWaypipePresent = -1 ;
+	char lBuff[MAX_PATH_OR_CMD] ;
+	FILE * lIn ;
+	char const * lString = "waypipe.exe";
+	if (!tinyfd_allowCursesDialogs) return 0;
+	if (lWaypipePresent < 0)
+	{
+		lIn = _popen("where waypipe.exe", "r");
+		if ( ! lIn )
+		{
+				lWaypipePresent = 0 ;
+				return 0 ;
+		}
+		while ( fgets( lBuff , sizeof( lBuff ) , lIn ) != NULL )
+		{}
+		_pclose( lIn ) ;
+		if ( lBuff[strlen( lBuff ) -1] == '\n' )
+		{
+				lBuff[strlen( lBuff ) -1] = '\0' ;
+		}
+		if ( strcmp(lBuff+strlen(lBuff)-strlen(lString),lString) )
+		{
+				lWaypipePresent = 0 ;
+		}
+		else
+		{
+				lWaypipePresent = 1 ;
+		}
+	}
+	return lWaypipePresent;
 }
 
 
@@ -3765,13 +3811,6 @@ static int waypipePresent(void)
 				lWaypipePresent = detectPresence("waypipe") ;
 		}
 		return lWaypipePresent ;
-}
-
-
-static int getenvDISPLAY(void)
-{
-		return tinyfd_assumeGraphicDisplay || getenv("DISPLAY")
-			|| ( getenv("WAYLAND_DISPLAY") && waypipePresent() ) ;
 }
 
 
