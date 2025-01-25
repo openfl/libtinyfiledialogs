@@ -3755,13 +3755,22 @@ static int whiptailPresent(void)
 		}
 }
 
+static int waypipePresent(void)
+{
+		static int lWaypipePresent = -1 ;
+		if ( lWaypipePresent < 0 )
+		{
+				lWaypipePresent = detectPresence("waypipe") ;
+		}
+		return lWaypipePresent ;
+}
 
 
 static int graphicMode(void)
 {
 		return !( tinyfd_forceConsole && (isTerminalRunning() || terminalName()) )
 						&& ( getenvDISPLAY()
-						|| (tfd_isDarwin() && (!getenv("SSH_TTY") || getenvDISPLAY() ) ) ) ;
+						|| (tfd_isDarwin() && (!getenv("SSH_TTY") || (getenvDISPLAY() && waypipePresent() ) ) ) ) ;
 }
 
 
