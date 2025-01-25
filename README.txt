@@ -13,11 +13,11 @@ Copyright (c) 2014 - 2024 Guillaume Vareille http://ysengrin.com
 
 tiny file dialogs ( cross-platform C C++ ) v3.18.3 [Jan 25, 2025]
  _________
-/         \   Tray-popup InputBox PasswordBox MessageBox Notification Beep
+/         \   Tray-popup InputBox PasswordBox MessageBox Notification Beep ColorPicker
 |tiny file|   ColorPicker OpenFileDialog SaveFileDialog SelectFolderDialog
 | dialogs |   ASCII UTF-8 (and also MBCS & UTF-16 for windows)
-\____  ___/   Native dialog library for WINDOWS MAC OSX GTK+ QT CONSOLE
-     \|       SSH support via automatic switch to console mode or X forwarding
+\____  ___/   Native dialog library for WINDOWS MAC OSX GTK+ QT CONSOLE X Wayland
+     \|       SSH: automatic switch to console mode / X forwarding / waypipe
 
 C89/C18 & C++98/C++23 compliant: tested with C & C++ compilers
 VisualStudio MinGW GCC Clang TinyCC IntelCC OpenWatcomC BorlandC SunCC
