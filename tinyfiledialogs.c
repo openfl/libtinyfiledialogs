@@ -7,7 +7,7 @@ Copyright (c) 2014 - 2024 Guillaume Vareille http://ysengrin.com
 
 ********* TINY FILE DIALOGS OFFICIAL WEBSITE IS ON SOURCEFORGE *********
   _________
- /         \ tinyfiledialogs.c v3.18.2 [Jun 8, 2024] zlib licence
+ /         \ tinyfiledialogs.c v3.18.3 [Jan 25, 2025] zlib licence
  |tiny file| Unique code file created [November 9, 2014]
  | dialogs |
  \____  ___/ http://tinyfiledialogs.sourceforge.net
@@ -108,7 +108,7 @@ misrepresented as being the original software.
 #endif
 #define LOW_MULTIPLE_FILES 32
 
-char tinyfd_version[8] = "3.18.2";
+char tinyfd_version[8] = "3.18.3";
 
 /******************************************************************************************************/
 /**************************************** UTF-8 on Windows ********************************************/
@@ -194,7 +194,7 @@ char tinyfd_needs[] = "\
 
 static int getenvDISPLAY(void)
 {
-		return tinyfd_assumeGraphicDisplay || getenv("DISPLAY");
+		return tinyfd_assumeGraphicDisplay || getenv("DISPLAY") || getenv("WAYLAND_DISPLAY") ;
 }
 
 
