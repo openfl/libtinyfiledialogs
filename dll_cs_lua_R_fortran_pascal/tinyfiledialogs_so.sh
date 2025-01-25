@@ -1,10 +1,11 @@
 #! /bin/sh
 
 if [ `uname -s` = "Linux" ]; then
- echo Linux
+ echo Linux 32
  gcc -m32 -fPIC -shared -o tinyfiledialogsLinux86.so ../tinyfiledialogs.c
  gcc -m32 -o hello ../hello.c ./tinyfiledialogsLinux86.so
 
+ echo Linux 64
  gcc -m64 -fPIC -shared -o tinyfiledialogsLinux64.so ../tinyfiledialogs.c
  gcc -m64 -o hello ../hello.c ./tinyfiledialogsLinux64.so
 elif [ `uname -s` = "OpenBSD" ]; then
