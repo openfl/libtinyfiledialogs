@@ -135,7 +135,7 @@ int tinyfd_forceConsole = 0 ; /* 0 (default) or 1 */
    it can use the package dialog or dialog.exe.
    on windows it only make sense for console applications */
 
-int tinyfd_assumeGraphicDisplay = 0; /* 0 (default) or 1  */
+/* int tinyfd_assumeGraphicDisplay = 0; */ /* 0 (default) or 1  */
 /* some systems don't set the environment variable DISPLAY even when a graphic display is present.
 set this to 1 to tell tinyfiledialogs to assume the existence of a graphic display */
 
@@ -196,7 +196,17 @@ char tinyfd_needs[] = "\
 
 static int getenvDISPLAY(void)
 {
-		return tinyfd_assumeGraphicDisplay || getenv("DISPLAY") || getenv("WAYLAND_DISPLAY") ;
+		/* return tinyfd_assumeGraphicDisplay || getenv("DISPLAY") || getenv("WAYLAND_DISPLAY") ; */
+	static int lReturnValue = -1 ;
+	
+	if ( lReturnValue < 0 )
+	{
+		lReturnValue = 0 ;
+		if ( getenv("DISPLAY") ) lReturnValue += 1 ;
+		if ( getenv("WAYLAND_DISPLAY") ) lReturnValue += 2 ;
+	}
+	
+	return lReturnValue ;
 }
 
 
@@ -464,7 +474,7 @@ int tinyfd_getGlobalInt(char const * aIntVariableName) /* to be called from C# (
 		else if ( !strcmp(aIntVariableName, "tinyfd_silent") ) return tinyfd_silent ;
 		else if ( !strcmp(aIntVariableName, "tinyfd_allowCursesDialogs") ) return tinyfd_allowCursesDialogs ;
 		else if ( !strcmp(aIntVariableName, "tinyfd_forceConsole") ) return tinyfd_forceConsole ;
-		else if ( !strcmp(aIntVariableName, "tinyfd_assumeGraphicDisplay") ) return tinyfd_assumeGraphicDisplay ;
+		/* else if ( !strcmp(aIntVariableName, "tinyfd_assumeGraphicDisplay") ) return tinyfd_assumeGraphicDisplay ; */
 #ifdef _WIN32
 		else if ( !strcmp(aIntVariableName, "tinyfd_winUtf8") ) return tinyfd_winUtf8 ;
 #endif
@@ -479,7 +489,7 @@ int tinyfd_setGlobalInt(char const * aIntVariableName, int aValue) /* to be call
 		else if (!strcmp(aIntVariableName, "tinyfd_silent")) { tinyfd_silent = aValue; return tinyfd_silent; }
 		else if (!strcmp(aIntVariableName, "tinyfd_allowCursesDialogs")) { tinyfd_allowCursesDialogs = aValue; return tinyfd_allowCursesDialogs; }
 		else if (!strcmp(aIntVariableName, "tinyfd_forceConsole")) { tinyfd_forceConsole = aValue; return tinyfd_forceConsole; }
-		else if (!strcmp(aIntVariableName, "tinyfd_assumeGraphicDisplay")) { tinyfd_assumeGraphicDisplay = aValue; return tinyfd_assumeGraphicDisplay; }
+		/* else if (!strcmp(aIntVariableName, "tinyfd_assumeGraphicDisplay")) { tinyfd_assumeGraphicDisplay = aValue; return tinyfd_assumeGraphicDisplay; } */
 #ifdef _WIN32
 		else if (!strcmp(aIntVariableName, "tinyfd_winUtf8")) { tinyfd_winUtf8 = aValue; return tinyfd_winUtf8; }
 #endif
@@ -4091,13 +4101,16 @@ int tfd_xpropPresent(void)
 	static int lXpropDetected = -1 ;
 	char lBuff[MAX_PATH_OR_CMD] ;
 	FILE * lIn ;
-
+	
 	if ( lXpropDetected < 0 )
 	{
-		lXpropDetected = detectPresence("xprop") ;
+		if ( getenvDISPLAY() & 1 ) lXpropDetected = detectPresence("xprop") ; /* bitwise & */
+		else lXpropDetected = 0 ;
 	}
+	
+	if ( ! lXpropDetected ) return 0 ;
 
-	if ( !lXpropReady && lXpropDetected )
+	if ( !lXpropReady )
 	{	/* xwayland Debian issue reported by Kay F. Jahnke and solved with his help */
 		lIn = popen( "xprop -root 32x '	$0' _NET_ACTIVE_WINDOW" , "r" ) ;
 		if ( fgets( lBuff , sizeof( lBuff ) , lIn ) != NULL )
@@ -4564,7 +4577,7 @@ int tinyfd_messageBox(
 				if (aTitle&&!strcmp(aTitle,"tinyfd_query")){strcpy(tinyfd_response,"kdialog");return 1;}
 
 				strcpy( lDialogString , "kdialog" ) ;
-								if ( (tfd_kdialogPresent() == 2) && tfd_xpropPresent() )
+				if ( (tfd_kdialogPresent() == 2) && tfd_xpropPresent() )
 				{
 						strcat(lDialogString, " --attach=$(xprop -root 32x '\t$0' _NET_ACTIVE_WINDOW | cut -f 2)"); /* contribution: Paul Rouget */
 				}

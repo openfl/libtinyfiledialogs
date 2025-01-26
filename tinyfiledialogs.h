@@ -112,7 +112,7 @@ extern int tinyfd_forceConsole;  /* 0 (default) or 1 */
    if enabled, it can use the package Dialog or dialog.exe.
    on windows it only make sense for console applications */
 
-extern int tinyfd_assumeGraphicDisplay; /* 0 (default) or 1  */
+/* extern int tinyfd_assumeGraphicDisplay; */ /* 0 (default) or 1  */
 /* some systems don't set the environment variable DISPLAY even when a graphic display is present.
 set this to 1 to tell tinyfiledialogs to assume the existence of a graphic display */
 

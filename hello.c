@@ -98,7 +98,7 @@ int main( int argc , char * argv[] )
 	tinyfd_silent = 1;  /* default is 1 */
 
 	tinyfd_forceConsole = 0; /* default is 0 */
-	tinyfd_assumeGraphicDisplay = 0; /* default is 0 */
+	/* tinyfd_assumeGraphicDisplay = 0; */ /* default is 0 */
 
 #ifdef _WIN32
 	 tinyfd_winUtf8 = 1; /* default is 1 */
