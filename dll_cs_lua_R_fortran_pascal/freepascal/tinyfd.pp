@@ -1,7 +1,7 @@
 { SPDX-License-Identifier: ZLIB
 Copyright (c) 2014 - 2023 Guillaume Vareille http://ysengrin.com
   _________
- /         \ tinyfiledialogs v3.13 [May 2, 2023] zlib licence
+ /         \ tinyfiledialogs v3.14 [Jan 26, 2025] zlib licence
  |tiny file|
  | dialogs |
  \____  ___/ http://tinyfiledialogs.sourceforge.net
@@ -77,7 +77,7 @@ interface
       tinyfd_silent : longint;cvar;external;
       tinyfd_allowCursesDialogs : longint;cvar;external;
       tinyfd_forceConsole : longint;cvar;external;
-      tinyfd_assumeGraphicDisplay : longint;cvar;external;
+      {tinyfd_assumeGraphicDisplay : longint;cvar;external;}
       tinyfd_response : array[0..1023] of char;cvar;external;
 
   procedure tinyfd_beep;cdecl;
