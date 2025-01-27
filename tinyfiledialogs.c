@@ -6335,20 +6335,20 @@ char * tinyfd_saveFileDialog(
 				if ( aDefaultPathAndOrFile && strlen(aDefaultPathAndOrFile) )
 				{
 					strcat(lDialogString, "\"") ;
-                    if ( aDefaultPathAndOrFile[0] != '/' )
-                    {
-                        strcat(lDialogString, lLastDirectory) ;
-                        strcat(lDialogString , "/" ) ;
-                    }
-                    strcat(lDialogString, aDefaultPathAndOrFile ) ;
-                    strcat(lDialogString , "\"" ) ;
+					if ( aDefaultPathAndOrFile[0] != '/' )
+					{
+						strcat(lDialogString, lLastDirectory) ;
+						strcat(lDialogString , "/" ) ;
+					}
+					strcat(lDialogString, aDefaultPathAndOrFile ) ;
+					strcat(lDialogString , "\"" ) ;
 				}
 				else
 				{
 					strcat(lDialogString, "\"") ;
-                    strcat(lDialogString, lLastDirectory) ;
+					strcat(lDialogString, lLastDirectory) ;
+					strcat(lDialogString , "/" ) ;
 					strcat(lDialogString, "\"") ;
-                    strcat(lDialogString , "/" ) ;
 				}
 
 				if ( aNumOfFilterPatterns > 0 )
@@ -6853,21 +6853,21 @@ char * tinyfd_openFileDialog(
 
 				if ( aDefaultPathAndOrFile && strlen(aDefaultPathAndOrFile) )
 				{
-                    strcat(lDialogString, "\"") ;
-                    if ( aDefaultPathAndOrFile[0] != '/' )
-                    {
-                        strcat(lDialogString, lLastDirectory) ;
-                        strcat(lDialogString , "/" ) ;
-                    }
-                    strcat(lDialogString, aDefaultPathAndOrFile ) ;
-                    strcat(lDialogString , "\"" ) ;
+					strcat(lDialogString, "\"") ;
+					if ( aDefaultPathAndOrFile[0] != '/' )
+					{
+						strcat(lDialogString, lLastDirectory) ;
+						strcat(lDialogString , "/" ) ;
+					}
+					strcat(lDialogString, aDefaultPathAndOrFile ) ;
+					strcat(lDialogString , "\"" ) ;
 				}
 				else
 				{
 					strcat(lDialogString, "\"") ;
-                    strcat(lDialogString, lLastDirectory) ;
+					strcat(lDialogString, lLastDirectory) ;
+					strcat(lDialogString , "/" ) ;
 					strcat(lDialogString, "\"") ;
-                    strcat(lDialogString , "/" ) ;
 				}
 
 				if ( aNumOfFilterPatterns > 0 )
@@ -7348,8 +7348,8 @@ char * tinyfd_selectFolderDialog(
 						strcat(lDialogString, "\"") ;
 						if ( aDefaultPath[0] != '/' )
 						{
-                            strcat(lDialogString, lLastDirectory) ;
-                            strcat(lDialogString , "/" ) ;
+							strcat(lDialogString, lLastDirectory) ;
+							strcat(lDialogString , "/" ) ;
 						}
 						strcat(lDialogString, aDefaultPath ) ;
 						strcat(lDialogString , "\"" ) ;
@@ -7357,9 +7357,9 @@ char * tinyfd_selectFolderDialog(
 				else
 				{
 						strcat(lDialogString, "\"") ;
-                        strcat(lDialogString, lLastDirectory) ;
+						strcat(lDialogString, lLastDirectory) ;
+						strcat(lDialogString , "/" ) ;
 						strcat(lDialogString, "\"") ;
-                        strcat(lDialogString , "/" ) ;
 				}
 
 				if ( aTitle && strlen(aTitle) )
