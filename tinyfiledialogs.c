@@ -198,14 +198,14 @@ static int getenvDISPLAY(void)
 {
 		/* return tinyfd_assumeGraphicDisplay || getenv("DISPLAY") || getenv("WAYLAND_DISPLAY") ; */
 	static int lReturnValue = -1 ;
-	
+
 	if ( lReturnValue < 0 )
 	{
 		lReturnValue = 0 ;
 		if ( getenv("DISPLAY") ) lReturnValue += 1 ;
 		if ( getenv("WAYLAND_DISPLAY") ) lReturnValue += 2 ;
 	}
-	
+
 	return lReturnValue ;
 }
 
@@ -3415,16 +3415,18 @@ int tfd_isDarwin(void)
 
 static int dirExists( char const * aDirPath )
 {
-		DIR * lDir ;
-		if ( ! aDirPath || ! strlen( aDirPath ) )
-				return 0 ;
-		lDir = opendir( aDirPath ) ;
-		if ( ! lDir )
-		{
-			return 0 ;
-		}
-		closedir( lDir ) ;
-		return 1 ;
+	//char * lPstring ;
+	DIR * lDir ;
+	if ( ! aDirPath || ! strlen( aDirPath ) )
+		return 0 ;
+	/*lPstring = getDoubleQuoted(aDirPath) ;*/
+	lDir = opendir( aDirPath ) ;
+	if ( ! lDir )
+	{
+		return 0 ;
+	}
+	closedir( lDir ) ;
+	return 1 ;
 }
 
 
@@ -4101,13 +4103,13 @@ int tfd_xpropPresent(void)
 	static int lXpropDetected = -1 ;
 	char lBuff[MAX_PATH_OR_CMD] ;
 	FILE * lIn ;
-	
+
 	if ( lXpropDetected < 0 )
 	{
 		if ( getenvDISPLAY() & 1 ) lXpropDetected = detectPresence("xprop") ; /* bitwise & */
 		else lXpropDetected = 0 ;
 	}
-	
+
 	if ( ! lXpropDetected ) return 0 ;
 
 	if ( ! lXpropReady )
@@ -6333,18 +6335,20 @@ char * tinyfd_saveFileDialog(
 
 				if ( aDefaultPathAndOrFile && strlen(aDefaultPathAndOrFile) )
 				{
+					strcat(lDialogString, "\"") ;
                     if ( aDefaultPathAndOrFile[0] != '/' )
                     {
                         strcat(lDialogString, lLastDirectory) ;
                         strcat(lDialogString , "/" ) ;
                     }
-                    strcat(lDialogString, "\"") ;
                     strcat(lDialogString, aDefaultPathAndOrFile ) ;
                     strcat(lDialogString , "\"" ) ;
 				}
 				else
 				{
+					strcat(lDialogString, "\"") ;
                     strcat(lDialogString, lLastDirectory) ;
+					strcat(lDialogString, "\"") ;
                     strcat(lDialogString , "/" ) ;
 				}
 
@@ -6850,18 +6854,20 @@ char * tinyfd_openFileDialog(
 
 				if ( aDefaultPathAndOrFile && strlen(aDefaultPathAndOrFile) )
 				{
+                    strcat(lDialogString, "\"") ;
                     if ( aDefaultPathAndOrFile[0] != '/' )
                     {
                         strcat(lDialogString, lLastDirectory) ;
                         strcat(lDialogString , "/" ) ;
                     }
-                    strcat(lDialogString, "\"") ;
                     strcat(lDialogString, aDefaultPathAndOrFile ) ;
                     strcat(lDialogString , "\"" ) ;
 				}
 				else
 				{
+					strcat(lDialogString, "\"") ;
                     strcat(lDialogString, lLastDirectory) ;
+					strcat(lDialogString, "\"") ;
                     strcat(lDialogString , "/" ) ;
 				}
 
@@ -7340,18 +7346,20 @@ char * tinyfd_selectFolderDialog(
 
 				if ( aDefaultPath && strlen(aDefaultPath) )
 				{
+						strcat(lDialogString, "\"") ;
 						if ( aDefaultPath[0] != '/' )
 						{
                             strcat(lDialogString, lLastDirectory) ;
                             strcat(lDialogString , "/" ) ;
 						}
-						strcat(lDialogString, "\"") ;
 						strcat(lDialogString, aDefaultPath ) ;
 						strcat(lDialogString , "\"" ) ;
 				}
 				else
 				{
+						strcat(lDialogString, "\"") ;
                         strcat(lDialogString, lLastDirectory) ;
+						strcat(lDialogString, "\"") ;
                         strcat(lDialogString , "/" ) ;
 				}
 
