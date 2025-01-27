@@ -3415,17 +3415,16 @@ int tfd_isDarwin(void)
 
 static int dirExists( char const * aDirPath )
 {
-	//char * lPstring ;
 	DIR * lDir ;
 	if ( ! aDirPath || ! strlen( aDirPath ) )
 		return 0 ;
-	/*lPstring = getDoubleQuoted(aDirPath) ;*/
+
 	lDir = opendir( aDirPath ) ;
 	if ( ! lDir )
-	{
 		return 0 ;
-	}
+	
 	closedir( lDir ) ;
+	
 	return 1 ;
 }
 
