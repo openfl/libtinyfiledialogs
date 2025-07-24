@@ -6426,8 +6426,8 @@ char * tinyfd_saveFileDialog(
 						}
 						for ( i = 0 ; i < aNumOfFilterPatterns ; i ++ )
 						{
-														strcat( lDialogString , " " ) ;
-														strcat( lDialogString , aFilterPatterns[i] ) ;
+							strcat( lDialogString , aFilterPatterns[i] ) ;
+							strcat( lDialogString , " " ) ;
 						}
 						strcat( lDialogString , "' --file-filter='All files | *'" ) ;
 				}
