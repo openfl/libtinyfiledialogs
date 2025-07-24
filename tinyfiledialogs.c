@@ -6424,9 +6424,10 @@ char * tinyfd_saveFileDialog(
 								strcat( lDialogString , aSingleFilterDescription ) ;
 								strcat( lDialogString , " |" ) ;
 						}
-						for ( i = 0 ; i < aNumOfFilterPatterns ; i ++ )
+						strcat( lDialogString , aFilterPatterns[0] ) ;
+						for ( i = 1 ; i < aNumOfFilterPatterns ; i ++ )
 						{
-							if ( i != 0 ) strcat( lDialogString , " " ) ;
+							strcat( lDialogString , " " ) ;
 							strcat( lDialogString , aFilterPatterns[i] ) ;
 						}
 						strcat( lDialogString , "' --file-filter='All files | *'" ) ;
@@ -6451,18 +6452,19 @@ char * tinyfd_saveFileDialog(
 		   }
 		   if (aNumOfFilterPatterns > 0)
 		   {
-			  strcat(lDialogString, " --file-filter='");
-			  if (aSingleFilterDescription && strlen(aSingleFilterDescription))
-			  {
-				 strcat(lDialogString, aSingleFilterDescription);
-				 strcat(lDialogString, " |");
-			  }
-			  for (i = 0; i < aNumOfFilterPatterns; i++)
-			  {
-				if ( i != 0 ) strcat(lDialogString, " ");
-				strcat(lDialogString, aFilterPatterns[i]);
-			  }
-			  strcat(lDialogString, "' --file-filter='All files | *'");
+				strcat(lDialogString, " --file-filter='");
+				if (aSingleFilterDescription && strlen(aSingleFilterDescription))
+				{
+					strcat(lDialogString, aSingleFilterDescription);
+					strcat(lDialogString, " |");
+				}
+				strcat(lDialogString, aFilterPatterns[0]);
+				for ( i = 1 ; i < aNumOfFilterPatterns; i++)
+				{
+					strcat(lDialogString, " ");
+					strcat(lDialogString, aFilterPatterns[i]);
+				}
+				strcat(lDialogString, "' --file-filter='All files | *'");
 		   }
 		   if (tinyfd_silent) strcat(lDialogString, " 2>/dev/null ");
 	  }
@@ -6952,9 +6954,10 @@ char * tinyfd_openFileDialog(
 								strcat( lDialogString , aSingleFilterDescription ) ;
 								strcat( lDialogString , " |" ) ;
 						}
-						for ( i = 0 ; i < aNumOfFilterPatterns ; i ++ )
+						strcat( lDialogString , aFilterPatterns[0] ) ;
+						for ( i = 1 ; i < aNumOfFilterPatterns ; i ++ )
 						{
-							if ( i != 0 ) strcat( lDialogString , " " ) ;
+							strcat( lDialogString , " " ) ;
 							strcat( lDialogString , aFilterPatterns[i] ) ;
 						}
 						strcat( lDialogString , "' --file-filter='All files | *'" ) ;
@@ -6981,24 +6984,25 @@ char * tinyfd_openFileDialog(
 			  strcat(lDialogString, aDefaultPathAndOrFile);
 			  strcat(lDialogString, "\"");
 		   }
-		   if (aNumOfFilterPatterns > 0)
-		   {
-			  strcat(lDialogString, " --file-filter='");
-			  if (aSingleFilterDescription && strlen(aSingleFilterDescription))
-			  {
-				 strcat(lDialogString, aSingleFilterDescription);
-				 strcat(lDialogString, " |");
-			  }
-			  for (i = 0; i < aNumOfFilterPatterns; i++)
-			  {
-				 if ( i != 0 ) strcat(lDialogString, " ");
+			if (aNumOfFilterPatterns > 0)
+			{
+				strcat(lDialogString, " --file-filter='");
+				if (aSingleFilterDescription && strlen(aSingleFilterDescription))
+				{
+					strcat(lDialogString, aSingleFilterDescription);
+					strcat(lDialogString, " |");
+				}
+				strcat(lDialogString, aFilterPatterns[0]);
+				for ( i = 1 ; i < aNumOfFilterPatterns; i++)
+				{
+				 strcat(lDialogString, " ");
 				 strcat(lDialogString, aFilterPatterns[i]);
-			  }
-			  strcat(lDialogString, "' --file-filter='All files | *'");
-		   }
-		   if (tinyfd_silent) strcat(lDialogString, " 2>/dev/null ");
-	  }
-	  else if ( tkinter3Present( ) )
+				}
+				strcat(lDialogString, "' --file-filter='All files | *'");
+			}
+			if (tinyfd_silent) strcat(lDialogString, " 2>/dev/null ");
+		}
+		else if ( tkinter3Present( ) )
 				{
 						if (aTitle&&!strcmp(aTitle,"tinyfd_query")){strcpy(tinyfd_response,"python3-tkinter");return (char *)1;}
 						strcpy( lDialogString , gPython3Name ) ;
