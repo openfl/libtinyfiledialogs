@@ -6422,7 +6422,7 @@ char * tinyfd_saveFileDialog(
 						if ( aSingleFilterDescription && strlen(aSingleFilterDescription) )
 						{
 								strcat( lDialogString , aSingleFilterDescription ) ;
-								strcat( lDialogString , " |" ) ;
+								strcat( lDialogString , " | " ) ;
 						}
 						strcat( lDialogString , aFilterPatterns[0] ) ;
 						for ( i = 1 ; i < aNumOfFilterPatterns ; i ++ )
@@ -6456,7 +6456,7 @@ char * tinyfd_saveFileDialog(
 				if (aSingleFilterDescription && strlen(aSingleFilterDescription))
 				{
 					strcat(lDialogString, aSingleFilterDescription);
-					strcat(lDialogString, " |");
+					strcat(lDialogString, " | ");
 				}
 				strcat(lDialogString, aFilterPatterns[0]);
 				for ( i = 1 ; i < aNumOfFilterPatterns; i++)
@@ -6952,7 +6952,7 @@ char * tinyfd_openFileDialog(
 						if ( aSingleFilterDescription && strlen(aSingleFilterDescription) )
 						{
 								strcat( lDialogString , aSingleFilterDescription ) ;
-								strcat( lDialogString , " |" ) ;
+								strcat( lDialogString , " | " ) ;
 						}
 						strcat( lDialogString , aFilterPatterns[0] ) ;
 						for ( i = 1 ; i < aNumOfFilterPatterns ; i ++ )
@@ -6990,7 +6990,7 @@ char * tinyfd_openFileDialog(
 				if (aSingleFilterDescription && strlen(aSingleFilterDescription))
 				{
 					strcat(lDialogString, aSingleFilterDescription);
-					strcat(lDialogString, " |");
+					strcat(lDialogString, " | ");
 				}
 				strcat(lDialogString, aFilterPatterns[0]);
 				for ( i = 1 ; i < aNumOfFilterPatterns; i++)
